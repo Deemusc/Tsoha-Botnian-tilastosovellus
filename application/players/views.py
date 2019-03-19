@@ -10,9 +10,18 @@ def players_index():
 def players_form():
     return render_template("players/new.html")
 
+@app.route("/players/<player_id>/", methods=["POST"])
+def players_set_number(player_id):
+
+    p = Player.query.get(player_id)
+    p.number = 99
+    db.session().commit()
+
+    return redirect(url_for("players_index"))
+
 @app.route("/players/", methods=["POST"])
 def players_create():
-    p = Player(request.form.get("name"), request.form.get("number"))
+    p = Player(request.form.get("name"))
     
     db.session().add(p)
     db.session().commit()

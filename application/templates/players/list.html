@@ -10,6 +10,12 @@
     <tr>
         <td>{{ player.name }}</td>
         <td>{{ player.number }}</td>
+        <td>
+            <form method="POST" action="{{ url_for('players_set_number', player_id=player.id) }}">
+                <input type="number" number="number"/>
+                <input type="submit" value="Change number."/>
+            </form>"
+        </td>
     </tr>
     {% endfor %}
 </table>
