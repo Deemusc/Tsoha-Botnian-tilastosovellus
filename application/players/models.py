@@ -5,7 +5,6 @@ class Player(db.Model):
     name = db.Column(db.String(48), nullable=False)
     number = db.Column(db.Integer, nullable=False)
 
-    def __init__(self, name):
+    def __init__(self, name, number):
         self.name = name
-        
-        #self.number = number
+        self.number = number

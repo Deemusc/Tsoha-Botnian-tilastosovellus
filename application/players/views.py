@@ -14,14 +14,14 @@ def players_form():
 def players_set_number(player_id):
 
     p = Player.query.get(player_id)
-    p.number = 99
+    p.number = request.form.get("number")
     db.session().commit()
 
     return redirect(url_for("players_index"))
 
 @app.route("/players/", methods=["POST"])
 def players_create():
-    p = Player(request.form.get("name"))
+    p = Player(request.form["name"], request.form["number"])
     
     db.session().add(p)
     db.session().commit()
