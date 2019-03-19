@@ -10,3 +10,11 @@ Otteluista pidetään kirjaa, yksittäisestä ottelusta tiedetään päivämää
 Jatkossa sovellusta voi olla mahdollista kehittää sisältämään esim. tilastoja jäähyistä.
 
 [Sovellus Herokussa](https://tsoha-botnian-tilastosovellus.herokuapp.com/)
+
+### Käyttötapauskuvauksia
+
+[Pelaajien lisääminen](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/pelaajien_lisaaminen.md)
+[Pelaajien listaaminen](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/pelaajien_listaaminen.md)
+[Pelinumeron muokkaaminen](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/pelinumeron_muokkaaminen.md)
+
+[Tietokantakaavio](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio.png)
