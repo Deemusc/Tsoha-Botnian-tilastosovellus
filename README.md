@@ -15,4 +15,4 @@ Jatkossa sovellusta voi olla mahdollista kehittää sisältämään esim. tilast
 
 [Käyttötapauksia](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/kayttotapaukset.md)
 
-[Tietokantakaavio](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio.png)
+[Tietokantakaavio](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_kuvana.png), [myös tekstimuodossa](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_tekstina.md)
