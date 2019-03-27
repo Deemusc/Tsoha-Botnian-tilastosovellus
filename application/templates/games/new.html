@@ -1,0 +1,68 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('games_create') }}">
+    {{ form.hidden_tag() }}
+    <table>
+        <tr>
+            <td>
+                {{ form.date.label }}
+            </td>
+            <td>
+                {{ form.date }}
+            </td>>
+            <td>                
+                <ul>
+                    {% for error in form.date.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>        
+            <td>
+                {{ form.opponent.label }}
+            </td>            
+            <td>
+                {{ form.opponent }}
+            </td>  
+            <td>                
+                <ul>
+                    {% for error in form.opponent.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>         
+            <td>
+                    {{ form.botnia_goals.label }}
+                </td>            
+                <td>
+                    {{ form.botnia_goals }}
+                </td>  
+                <td>                
+                    <ul>
+                        {% for error in form.botnia_goals.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>   
+                <td>
+                        {{ form.opponent_goals.label }}
+                    </td>            
+                    <td>
+                        {{ form.opponent_goals }}
+                    </td>  
+                    <td>                
+                        <ul>
+                            {% for error in form.opponent_goals.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>                                             
+        </tr>
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="Add a new game"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

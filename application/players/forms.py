@@ -6,4 +6,4 @@ class PlayerForm(FlaskForm):
     number = IntegerField("Player's number", [validators.NumberRange(min=1, max=99)])
 
     class Meta:
-        crsf = False
+        csrf = False

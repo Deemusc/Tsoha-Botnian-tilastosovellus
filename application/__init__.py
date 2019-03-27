@@ -14,6 +14,8 @@ from application import views
 
 from application.players import models
 from application.players import views
+from application.games import models
+from application.games import views
 
 from application.auth import models
 from application.auth import views

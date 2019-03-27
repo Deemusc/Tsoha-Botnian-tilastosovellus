@@ -1,0 +1,60 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('players_edit') }}">
+        {{ form.hidden_tag() }}
+    <table>
+        <tr>
+            <th>Please fill in player's id and new information.</th>
+        </tr>
+        <tr> 
+            <td>
+            {{ form.id.label }}                                                        
+            </td>
+            <td>
+                {{ form.id }}
+            </td>
+            <td>
+                <ul>
+                    {% for error in form.id.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+        </tr>
+        <tr>
+                <td>
+                    {{ form.name.label }}
+                </td>
+                <td>
+                    {{ form.name }}
+                </td>>
+                <td>                
+                    <ul>
+                        {% for error in form.name.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>        
+                <td>
+                    {{ form.number.label }}
+                </td>            
+                <td>
+                    {{ form.number }}
+                </td>  
+                <td>                
+                    <ul>
+                        {% for error in form.number.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>                                                   
+            </tr>
+        <tr>
+            <td colspan="3">
+                <input type="submit" value="Update player"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

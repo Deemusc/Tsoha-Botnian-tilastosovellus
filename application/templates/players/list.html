@@ -9,13 +9,13 @@
     {% for player in players %}
     <tr>
         <td>{{ player.name }}</td>
-        <td>{{ player.number }}</td>
-        <td>
-            <form method="POST" action="{{ url_for('players_set_number', player_id=player.id) }}">
+        <td>{{ player.number }}</td>        
+    <td>
+        <form method="POST" action="{{ url_for('players_set_number', player_id=player.id) }}">
                 <input type="number" name="number"/>
-                <input type="submit" value="Change number."/>
-            </form>"
-        </td>
+                <input type="submit" value="Change number"/>
+        </form>
+    </td>
     </tr>
     {% endfor %}
 </table>

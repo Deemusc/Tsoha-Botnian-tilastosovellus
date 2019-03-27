@@ -14,22 +14,37 @@ def players_index():
     return render_template("players/list.html", players = Player.query.all())
 
 @app.route("/players/new/")
-@login_required
+#@login_required
 def players_form():
     return render_template("players/new.html", form = PlayerForm())
 
+#@app.route("/players/edit/")
+#@login_required
+#def players_editForm():
+#    return render_template("players/edit.html", form = PlayerEditForm())
+
 @app.route("/players/<player_id>/", methods=["POST"])
-@login_required
+#@login_required
 def players_set_number(player_id):
 
-    p = Player.query.get(player_id)
+    p = Player.query.get(player_id)    
     p.number = request.form.get("number")
     db.session().commit()
 
     return redirect(url_for("players_index"))
 
+#@app.route("/players/<player_id>/", methods=["POST"])
+#@login_required
+#def players_set_name(player_id):
+#
+#    p = Player.query.get(player_id)
+#    p.name = request.form.get("name")
+#    db.sessio().commit()
+
+#    return redirect(url_for("players_index"))
+
 @app.route("/players/", methods=["POST"])
-@login_required
+#@login_required
 def players_create():
     form = PlayerForm(request.form)
 
