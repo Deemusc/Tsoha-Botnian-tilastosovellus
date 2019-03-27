@@ -1,12 +1,12 @@
-# Pelaajien listaaminen
+## Pelaajien listaaminen
 
 Pelaajat listataan lisäämisjärjestyksessään linkin *List players* takaa.
 
-# Pelaajan lisääminen tilastotietokantaan
+## Pelaajan lisääminen tilastotietokantaan
 
 Uusi pelaaja lisätään tilastoihin *Add a player* -linkistä. Pelaajalle syötetään nimi ja pelinumero. Uusi pelajaa lisätään tietokantaan **Player**.
 
-# Pelaajan lisääminen tilastotietokantaan
+## Pelaajan lisääminen tilastotietokantaan
 
 Uusi pelaaja lisätään tilastoihin *Add a player* -linkistä. Pelaajalle syötetään nimi ja pelinumero. Uusi pelajaa lisätään tietokantaan **Player**.
 
