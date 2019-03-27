@@ -13,11 +13,6 @@ Jatkossa sovellusta voi olla mahdollista kehittää sisältämään esim. tilast
 
 ### Käyttötapauskuvauksia
 
-[Pelaajien lisääminen](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/pelaajien_lisaaminen.md)
-
-[Pelaajien listaaminen](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/pelaajien_listaaminen.md)
-
-[Pelinumeron muokkaaminen](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/pelinumeron_muokkaaminen.md)
-
+[Käyttötapauksia](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/kayttotapaukset.md)
 
 [Tietokantakaavio](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio.png)
