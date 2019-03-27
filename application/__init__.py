@@ -1,25 +1,38 @@
-# Flask tuodaan käyttöön
+# Flask-sovellus
 from flask import Flask
 app = Flask(__name__)
 
-# SQLAlchemy mukaan
+# tietokanta
 from flask_sqlalchemy import SQLAlchemy
-# Käytetään players.db -nimistä SQLite-tietokantaa. Kolme vinoviivaa
-# = tiedosto sijaitsee sovelluksen tiedostojen kanssa samassa paikassa
 app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///players.db"
-
-# SQLAlchemy tulostaa kaikki SQL-kyselyt
 app.config["SQLALCHEMY_ECHO"] = True
 
-# Luodaan db-olio, jota käytetään tietokannan käsittelyyn
 db = SQLAlchemy(app)
 
-# Luetaan kansiosta application tiedoston views sisältö
+# sovelluksen toiminnallisuudet
 from application import views
 
-# Tuodaan luokat models ja views käyttöön
 from application.players import models
 from application.players import views
 
-# Luodaan tarvittavat tietokantataulut
+from application.auth import models
+from application.auth import views
+
+# kirjautumistoiminnallisuudet
+from application.auth.models import User
+from os import urandom
+app.config["SECRET_KEY"] = urandom(32)
+
+from flask_login import LoginManager
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+login_manager.login_view = "auth_login"
+login_manager.login_message = "Please login to use this functionality."
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
+# luodaan tietokantataulut tarvittaessa
 db.create_all()
