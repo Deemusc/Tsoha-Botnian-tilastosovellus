@@ -1,5 +1,5 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from application import app, db
 from application.players.models import Player
@@ -13,7 +13,7 @@ def players_index():
 
 # Pelaajien haku-sivu, toimii mukavasti.
 @app.route("/players/query/", methods=["GET", "POST"])
-#login_required
+@login_required
 def players_query():
     error = None
     form = queryForm()
@@ -27,13 +27,14 @@ def players_query():
 
 # Uuden pelaajan luominen, ei siirrä käyttäjää (vielä) pelaajien listaukseen.
 @app.route("/players/new/", methods=["GET", "POST"])
-#@login_required
+@login_required
 def players_create():
     error = None
     form = PlayerForm()
     if form.validate_on_submit():
         try:
             p = Player(number=form.number.data, name=form.name.data)
+            p.account_id = current_user.id
             db.session.add(p)
             db.session.commit()
             flash("Player added")
@@ -43,7 +44,7 @@ def players_create():
 
 # Pelaajan muokkaaminen, ei siirrä käyttäjää (vielä) pelaajien listaukseen.
 @app.route("/players/edit/<int:id>/", methods=["GET", "POST"])
-#@login_required
+@login_required
 def players_edit(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()
@@ -60,7 +61,7 @@ def players_edit(id):
 
 # Pelaajan poistaminen, ei siirrä käyttäjää (vielä) pelaajien listaukseen.
 @app.route("/players/delete/<int:id>/", methods=["GET", "POST"])
-#@login_required
+@login_required
 def players_delete(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()

@@ -5,9 +5,7 @@ class Player(db.Model):
     number = db.Column(db.Integer, nullable=False, primary_key=True, unique=True)
     name = db.Column(db.String(48), nullable=False)
 
-    #games = db.relationship("Game",
-     #       secondary=games,
-      #      backref=db.backref("players", lazy=True))
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
 
     def __init__(self, name, number):
         self.name = name
