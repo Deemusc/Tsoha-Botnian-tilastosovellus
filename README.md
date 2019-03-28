@@ -14,3 +14,8 @@ Otteluista pidetään kirjaa, yksittäisestä ottelusta tiedetään päivämää
 [Käyttötapauksia](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/kayttotapaukset.md)
 
 [Tietokantakaavio](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_kuvana.png), [myös tekstimuodossa](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_tekstina.md)
+
+### Testitunnukset
+
+Käyttäjätunnus: hartwall
+Salasana: jaffa
