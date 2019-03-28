@@ -10,3 +10,4 @@ class Goal(db.Model):
         self.game_id
         self.scorer_id
         
+    

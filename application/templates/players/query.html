@@ -1,0 +1,33 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th># </th>
+        <th>Player</th>
+    </tr>
+    {% if form %}
+        <form action="{{ url_for('players_query') }}" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.name.label }}<br />
+            {{ form.name }}<br /><br />
+            <input class="btn btn-lg btn-primary" role="button" type="submit" value="Search">
+        </form>
+    {% endif %}
+
+    {% if players %}
+        {% for player in players %}
+        <td>{{ player.number }}</td>
+        <td>{{ player.name }}</td>
+        <td>
+            <a class="btn btn-primary" href="{{ url_for('players_edit', id=player.id) }}">Edit player</a>
+            <a class="btn btn-danger" href="{{ url_for('players_delete', id=player.id) }}">Delete player</a>
+        </td>
+        {% endfor %}
+    {% endif %}
+
+    {% if not players %}
+        <td>No players found.</td>
+    {% endif %}
+</table>
+{% endblock %}

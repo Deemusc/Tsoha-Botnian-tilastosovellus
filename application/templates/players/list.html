@@ -3,18 +3,16 @@
 {% block body %}
 <table>
     <tr>
+        <th># </th>
         <th>Player</th>
-        <th>Jersey number</th>
     </tr>
     {% for player in players %}
     <tr>
-        <td>{{ player.name }}</td>
-        <td>{{ player.number }}</td>        
+        <td>{{ player.number }}</td>
+        <td>{{ player.name }}</td>        
     <td>
-        <form method="POST" action="{{ url_for('players_set_number', player_id=player.id) }}">
-                <input type="number" name="number"/>
-                <input type="submit" value="Change number"/>
-        </form>
+        <a class="btn btn-primary" href="{{ url_for('players_edit', id=player.id) }}">Edit player</a>
+        <a class="btn btn-danger" href="{{ url_for('players_delete', id=player.id) }}">Delete player</a>
     </td>
     </tr>
     {% endfor %}

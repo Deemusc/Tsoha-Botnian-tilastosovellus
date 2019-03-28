@@ -3,58 +3,68 @@ from flask_login import login_required
 
 from application import app, db
 from application.players.models import Player
-from application.players.forms import PlayerForm
-
-#import os
-#SECRET_KEY = os.urandom(32)
-#app.config['SECRET_KEY'] = SECRET_KEY
+from application.players.forms import PlayerForm, queryForm
 
 @app.route("/players/", methods=["GET"])
 def players_index():
-    return render_template("players/list.html", players = Player.query.all())
+    p = Player.query.all()
+    return render_template("/players/list.html", players=p)
 
-@app.route("/players/new/")
-#@login_required
-def players_form():
-    return render_template("players/new.html", form = PlayerForm())
+@app.route("/players/query/", methods=["GET", "POST"])
+#login_required
+def players_query():
+    error = None
+    form = queryForm()
+    if form.validate_on_submit():
+        p = Player.query.filter_by(name=form.name.data).all()
+        if p:
+            return render_template("/players/query.html", form=form, players=p)
+        else:
+            error = "No players"
+    return render_template("/players/query.html", form=form, error=error)
 
-#@app.route("/players/edit/")
-#@login_required
-#def players_editForm():
-#    return render_template("players/edit.html", form = PlayerEditForm())
-
-@app.route("/players/<player_id>/", methods=["POST"])
-#@login_required
-def players_set_number(player_id):
-
-    p = Player.query.get(player_id)    
-    p.number = request.form.get("number")
-    db.session().commit()
-
-    return redirect(url_for("players_index"))
-
-#@app.route("/players/<player_id>/", methods=["POST"])
-#@login_required
-#def players_set_name(player_id):
-#
-#    p = Player.query.get(player_id)
-#    p.name = request.form.get("name")
-#    db.sessio().commit()
-
-#    return redirect(url_for("players_index"))
-
-@app.route("/players/", methods=["POST"])
+@app.route("/players/new/", methods=["GET", "POST"])
 #@login_required
 def players_create():
-    form = PlayerForm(request.form)
+    error = None
+    form = PlayerForm()
+    if form.validate_on_submit():
+        try:
+            p = Player(number=form.number.data, name=form.name.data)
+            db.session.add(p)
+            db.session.commit()
+            flash("Player added")
+        except Exception as e:
+            error = e            
+    return render_template("/players/new.html", form = form, error = error)   
 
-    if not form.validate():
-        return render_template("players/new.html", form = form)
+@app.route("/players/edit/<int:id>/", methods=["GET", "POST"])
+#@login_required
+def players_edit(id):
+    error = None
+    p = Player.query.filter_by(id=id).first_or_404()
+    form = PlayerForm(obj=p)
+    if form.validate_on_submit():
+        try:
+            p.number = form.number.data
+            p.name = form.name.data
+            db.session.commit()
+            flash("Player's info updated")
+        except Exception as e:
+            error = e
+    return render_template("/players/edit.html", form = form, error=error)
 
-    p = Player(form.name.data, form.number.data)
-    
-    db.session().add(p)
-    db.session().commit()
-
-    return redirect(url_for("players_index"))
+@app.route("/players/delete/<int:id>/", methods=["GET", "POST"])
+#@login_required
+def players_delete(id):
+    error = None
+    p = Player.query.filter_by(id=id).first_or_404()
+    if p:
+        try:
+            db.session.delete(p)
+            db.session.commit()
+            flash("Player deleted")
+        except Exception as e:
+            error = e
+    return render_template("/players/list.html", error=error)
 

@@ -14,6 +14,15 @@ def games_index():
 def games_form():
     return render_template("games/new.html", form = GameForm())
 
+#@app.route("/games/<game_id>/", methods=["POST"])
+#login_required
+#def games_details(game_id):
+
+
+
+ #   return redirect(url_for("games_index"))
+
+
 #@app.route("/games/edit/")
 #@login_required
 #def games_editForm():

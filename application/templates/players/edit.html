@@ -1,41 +1,15 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('players_edit') }}">
+<form method="POST" action="{{ url_for('players_edit', id=form.id.data) }}">
         {{ form.hidden_tag() }}
     <table>
         <tr>
-            <th>Please fill in player's id and new information.</th>
-        </tr>
-        <tr> 
-            <td>
-            {{ form.id.label }}                                                        
-            </td>
-            <td>
-                {{ form.id }}
-            </td>
-            <td>
-                <ul>
-                    {% for error in form.id.errors %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            </td>
-        </tr>
-        <tr>
-                <td>
-                    {{ form.name.label }}
-                </td>
-                <td>
-                    {{ form.name }}
-                </td>>
-                <td>                
-                    <ul>
-                        {% for error in form.name.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>        
+            <tr>
+                <th>
+                    Fill in player's new information.
+                </th>
+            </tr>            
                 <td>
                     {{ form.number.label }}
                 </td>            
@@ -48,11 +22,28 @@
                         <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
-                </td>                                                   
-            </tr>
+                </td>
+                <td>
+                    {{ form.name.label }}
+                </td>
+                <td>
+                    {{ form.name }}
+                </td>>
+                <td>                
+                    <td>                
+                <td>                
+                    <ul>
+                        {% for error in form.name.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </td>                                                    
+                </td>        
+                </td>                                                    
+        </tr>
         <tr>
             <td colspan="3">
-                <input type="submit" value="Update player"/>
+                <input type="submit" value="Edit player"/>
             </td>
         </tr>
     </table>
