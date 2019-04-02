@@ -25,7 +25,7 @@ def games_query():
             error = "No games"
     return render_template("/games/query.html", form=form, error=error)
 
-# Uuden pelin luominen, ei siirrä käyttäjää (vielä) pelien listaukseen.
+# Uuden pelin luominen.
 @app.route("/games/new/", methods=["GET", "POST"])
 @login_required
 def games_create():
@@ -38,10 +38,11 @@ def games_create():
             db.session.commit()
             flash("game added")
         except Exception as e:
-            error = e            
+            error = e 
+        return redirect(url_for("games_index"))
     return render_template("/games/new.html", form = form, error = error)   
 
-# Pelin muokkaaminen, ei siirrä käyttäjää (vielä) pelien listaukseen.
+# Pelin muokkaaminen
 @app.route("/games/edit/<int:id>/", methods=["GET", "POST"])
 @login_required
 def games_edit(id):
@@ -58,9 +59,10 @@ def games_edit(id):
             flash("Game info updated")
         except Exception as e:
             error = e
+        return redirect(url_for("games_index"))
     return render_template("/games/edit.html", form = form, error=error)
 
-# Pelin poistaminen, ei siirrä käyttäjää (vielä) pelien listaukseen.
+# Pelin poistaminen
 @app.route("/games/delete/<int:id>/", methods=["GET", "POST"])
 @login_required
 def games_delete(id):
@@ -73,5 +75,5 @@ def games_delete(id):
             flash("Game deleted")
         except Exception as e:
             error = e
+        return redirect(url_for("games_index"))
     return render_template("/games/list.html", error=error)
-    

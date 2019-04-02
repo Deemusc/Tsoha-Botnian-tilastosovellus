@@ -25,7 +25,7 @@ def players_query():
             error = "No players"
     return render_template("/players/query.html", form=form, error=error)
 
-# Uuden pelaajan luominen, ei siirrä käyttäjää (vielä) pelaajien listaukseen.
+# Uuden pelaajan luominen, siirtää käyttäjän pelaajien listaukseen.
 @app.route("/players/new/", methods=["GET", "POST"])
 @login_required
 def players_create():
@@ -37,12 +37,13 @@ def players_create():
             p.account_id = current_user.id
             db.session.add(p)
             db.session.commit()
-            flash("Player added")
+            flash("Player added")            
         except Exception as e:
             error = e            
+        return redirect(url_for("players_index"))    
     return render_template("/players/new.html", form = form, error = error)   
 
-# Pelaajan muokkaaminen, ei siirrä käyttäjää (vielä) pelaajien listaukseen.
+# Pelaajan muokkaaminen, siirtää käyttäjän pelaajien listaukseen.
 @app.route("/players/edit/<int:id>/", methods=["GET", "POST"])
 @login_required
 def players_edit(id):
@@ -57,9 +58,10 @@ def players_edit(id):
             flash("Player's info updated")
         except Exception as e:
             error = e
+        return redirect(url_for("players_index"))    
     return render_template("/players/edit.html", form = form, error=error)
 
-# Pelaajan poistaminen, ei siirrä käyttäjää (vielä) pelaajien listaukseen.
+# Pelaajan poistaminen.
 @app.route("/players/delete/<int:id>/", methods=["GET", "POST"])
 @login_required
 def players_delete(id):
@@ -72,4 +74,5 @@ def players_delete(id):
             flash("Player deleted")
         except Exception as e:
             error = e
+        return redirect(url_for("players_index"))    
     return render_template("/players/list.html", error=error)
