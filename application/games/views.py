@@ -1,76 +1,77 @@
 from flask import redirect, render_template, request, url_for
-from flask_login import login_required
+from flask_login import login_required, current_user
 
 from application import app, db
 from application.games.models import Game
-from application.games.forms import GameForm
+from application.games.forms import GameForm, queryGameForm
 
+#pelien listaus
 @app.route("/games/", methods=["GET"])
 def games_index():
-    return render_template("games/list.html", games = Game.query.all())
+    g = Game.query.all()
+    return render_template("/games/list.html", games=g)
 
-@app.route("/games/new/")
-#@login_required
-def games_form():
-    return render_template("games/new.html", form = GameForm())
+# pelien hakutoiminto, atm vain vastustajan nimellä
+@app.route("/games/query/", methods=["GET", "POST"])
+@login_required
+def games_query():
+    error = None
+    form = queryGameForm()
+    if form.validate_on_submit():
+        g = Game.query.filter_by(opponent=form.opponent.data).all()
+        if g:
+            return render_template("/games/query.html", form=form, games=g)
+        else:
+            error = "No games"
+    return render_template("/games/query.html", form=form, error=error)
 
-#@app.route("/games/<game_id>/", methods=["POST"])
-#login_required
-#def games_details(game_id):
-
-
-
- #   return redirect(url_for("games_index"))
-
-
-#@app.route("/games/edit/")
-#@login_required
-#def games_editForm():
-#    return render_template("games/edit.html", form = GameEditForm())
-
-@app.route("/games/<game_id>/", methods=["POST"])
-#@login_required
-def games_set_botnia_goals(game_id):
-
-    g = Game.query.get(game_id)
-    g.botnia_goals = request.form.get("botnia_goals")
-    db.session.commit()
-
-    return redirect(url_for("games_index"))    
-
-#@app.route("/games/", methods=["GET", "POST"])
-#@login_required
-#def games_edit():
-#    form = GameEditForm(request.form)
-#
-#    if not form.validate():
-#        return render_template("games/edit.html", form = form)
-#
-#    g = Game.query.get(form.id.data)
-#    
-#    g.date = form.date.data
-#    g.opponent = form.opponent.data
-#   g.botnia_goals = form.botnia_goals.data
-#    g.opponent_goals = form.opponent_goals.data
-#
-#   db.session.merge(g)
-#    db.session.flush()
-#    db.session().commit()
-#
-#    return redirect(url_for("games_index"))
-
-@app.route("/games/", methods=["POST"])
-#@login_required
+# Uuden pelin luominen, ei siirrä käyttäjää (vielä) pelien listaukseen.
+@app.route("/games/new/", methods=["GET", "POST"])
+@login_required
 def games_create():
-    form = GameForm(request.form)
+    error = None
+    form = GameForm()
+    if form.validate_on_submit():
+        try:
+            g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=form.botnia_goals.data, opponent_goals=form.opponent_goals.data)
+            db.session.add(g)
+            db.session.commit()
+            flash("game added")
+        except Exception as e:
+            error = e            
+    return render_template("/games/new.html", form = form, error = error)   
 
-    if not form.validate():
-        return render_template("games/new.html", form = form)
+# Pelin muokkaaminen, ei siirrä käyttäjää (vielä) pelien listaukseen.
+@app.route("/games/edit/<int:id>/", methods=["GET", "POST"])
+@login_required
+def games_edit(id):
+    error = None
+    g = Game.query.filter_by(id=id).first_or_404()
+    form = GameForm(obj=g)
+    if form.validate_on_submit():
+        try:
+            g.date = form.date.data
+            g.opponent = form.opponent.data
+            g.botnia_goals = form.botnia_goals.data
+            g.opponent_goals = form.opponent_goals.data
+            db.session.commit()
+            flash("Game info updated")
+        except Exception as e:
+            error = e
+    return render_template("/games/edit.html", form = form, error=error)
 
-    g = Game(form.date.data, form.opponent.data, form.botnia_goals.data, form.opponent_goals.data)
+# Pelin poistaminen, ei siirrä käyttäjää (vielä) pelien listaukseen.
+@app.route("/games/delete/<int:id>/", methods=["GET", "POST"])
+@login_required
+def games_delete(id):
+    error = None
+    g = Game.query.filter_by(id=id).first_or_404()
+    if p:
+        try:
+            db.session.delete(g)
+            db.session.commit()
+            flash("Game deleted")
+        except Exception as e:
+            error = e
+    return render_template("/games/list.html", error=error)
     
-    db.session().add(g)
-    db.session().commit()
-
-    return redirect(url_for("games_index"))
-

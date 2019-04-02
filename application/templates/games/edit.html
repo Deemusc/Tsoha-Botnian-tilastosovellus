@@ -1,86 +1,81 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('games_edit') }}">
+<form method="POST" action="{{ url_for('games_edit', id=form.id.data) }}">
     {{ form.hidden_tag() }}
-    <table>
-        <tr>
-            <th>Please fill in games's new information.</th>
-        </tr>
-        <tr>        
-            <td>
-                {{ form.id.label }}
-            </td>            
-            <td>
-                {{ form.id }}
-            </td>  
-            <td>                
-                <ul>
-                    {% for error in form.id.errors %}
-                    <li>{{ error }}</li>
-                    {% endfor %}
-                </ul>
-            </td>                                                   
-        </tr>
-        <tr>
-                <td>
-                    {{ form.date.label }}
-                </td>
-                <td>
-                    {{ form.date }}
-                </td>>
-                <td>                
-                    <ul>
-                        {% for error in form.date.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>        
-                <td>
-                    {{ form.opponent.label }}
-                </td>            
-                <td>
-                    {{ form.opponent }}
-                </td>  
-                <td>                
-                    <ul>
-                        {% for error in form.opponent.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-                </td>                                     
-                <td>
-                        {{ form.botnia_goals.label }}
+        <table>
+            <tr>
+                <tr>
+                    <th>
+                        Fill in game's new information.
+                    </th>
+                </tr>            
+                    <td>
+                        {{ form.date.label }}
                     </td>            
                     <td>
-                        {{ form.botnia_goals }}
+                        {{ form.date }}
                     </td>  
+                    <td>                
+                        <ul>
+                            {% for error in form.date.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>
+                    <td>
+                        {{ form.opponent.label }}
+                    </td>
+                    <td>
+                        {{ form.opponent }}
+                    </td>>
+                    <td>                
+                        <td>                
+                    <td>                
+                        <ul>
+                            {% for error in form.opponent.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>                                                    
+                    <td>
+                        {{ form.botnia_goals.label }}
+                    </td>
+                    <td>
+                        {{ form.botnia_goals }}
+                    </td>>
+                    <td>                
+                        <td>                
                     <td>                
                         <ul>
                             {% for error in form.botnia_goals.errors %}
                             <li>{{ error }}</li>
                             {% endfor %}
                         </ul>
-                    </td>                                     
+                    </td>                                               
                     <td>
-                            {{ form.opponent_goals.label }}
-                        </td>            
-                        <td>
-                            {{ form.opponent_goals }}
-                        </td>  
+                        {{ form.opponent_goals.label }}
+                    </td>
+                    <td>
+                        {{ form.opponent_goals }}
+                    </td>>
+                    <td>                
                         <td>                
-                            <ul>
-                                {% for error in form.opponent_goals.errors %}
-                                <li>{{ error }}</li>
-                                {% endfor %}
-                            </ul>
-                        </td>                                                   
+                    <td>                
+                        <ul>
+                            {% for error in form.opponent_goals.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>                                           
+                </td>        
+                    </td>                                                    
             </tr>
-        <tr>
-            <td colspan="3">
-                <input type="submit" value="Update game"/>
-            </td>
-        </tr>
-    </table>
-</form>
-{% endblock %}
+            <tr>
+                <td colspan="3">
+                    <input type="submit" value="Edit game"/>
+                </td>
+            </tr>
+        </table>
+    </form>
+    {% endblock %}

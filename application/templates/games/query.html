@@ -1,0 +1,37 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Date </th>
+        <th>Opponent</th>
+        <th>Botnia's goals</th>
+        <th>Opponent's goals</th>
+    </tr>
+    {% if form %}
+        <form action="{{ url_for('games_query') }}" method="POST">
+            {{ form.hidden_tag() }}
+            {{ form.opponent.label }}<br />
+            {{ form.opponent }}<br /><br />
+            <input class="btn btn-lg btn-primary" role="button" type="submit" value="Search">
+        </form>
+    {% endif %}
+
+    {% if games %}
+        {% for game in games %}
+        <td>{{ game.date }}</td>
+        <td>{{ game.opponent }}</td>
+        <td>{{ game.botnia_goals }}</td>
+        <td>{{ game.opponent_goals }}</td>
+        <td>
+            <a class="btn btn-primary" href="{{ url_for('games_edit', id=game.id) }}">Edit game</a>
+            <a class="btn btn-danger" href="{{ url_for('games_delete', id=game.id) }}">Delete game</a>
+        </td>
+        {% endfor %}
+    {% endif %}
+
+    {% if not games %}
+        <td>No games found.</td>
+    {% endif %}
+</table>
+{% endblock %}
