@@ -27,6 +27,7 @@
             <a class="btn btn-primary" href="{{ url_for('games_edit', id=game.id) }}">Edit game</a>
             <a class="btn btn-danger" href="{{ url_for('games_delete', id=game.id) }}">Delete game</a>
         </td>
+        <tr></tr>
         {% endfor %}
     {% endif %}
 

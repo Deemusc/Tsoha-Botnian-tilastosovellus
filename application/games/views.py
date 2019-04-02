@@ -39,7 +39,8 @@ def games_create():
             flash("game added")
         except Exception as e:
             error = e 
-        return redirect(url_for("games_index"))
+        # tarkoitus olisi ottelun perustietojen jälkeen päästä sivulle, jossa voidaan syöttää kyseisen pelin maalien tiedot
+        return redirect(url_for("goals_add"))
     return render_template("/games/new.html", form = form, error = error)   
 
 # Pelin muokkaaminen
@@ -68,7 +69,7 @@ def games_edit(id):
 def games_delete(id):
     error = None
     g = Game.query.filter_by(id=id).first_or_404()
-    if p:
+    if g:
         try:
             db.session.delete(g)
             db.session.commit()
