@@ -12,5 +12,6 @@ from application.goals.forms import GoalForm
 #    form = GoalForm()
 #    if form.validate_on_submit():
 #        try:
+#            g = Goal(game_id=game_id, scorer_id)
 
 

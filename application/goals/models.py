@@ -6,7 +6,8 @@ class Goal(db.Model):
     scorer_id = db.Column(db.Integer, nullable=False)
     assist_id = db.Column(db.Integer)
 
-    def __init__(self, scorer_id, assist_id):
+    def __init__(self, game_id, scorer_id, assist_id):
+        self.game_id = game_id
         self.scorer_id = scorer_id
         self.assist_id = assist_id
     
