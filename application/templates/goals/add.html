@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('goals_create') }}">
+<form method="POST" action="{{ url_for('goals_add', game_id=form.game_id.data) }}">
     {{ form.hidden_tag() }}
 <table>
         <td>
@@ -9,7 +9,7 @@
             </td>
             <td>
                 {{ form.scorer_number }}
-            </td>>
+            </td>
             <td>                
                 <ul>
                     {% for error in form.scorer_number.errors %}
@@ -22,7 +22,7 @@
                 </td>
                 <td>
                     {{ form.assist_number }}
-                </td>>
+                </td>
                 <td>                
                     <ul>
                         {% for error in form.assist_number.errors %}
