@@ -8,6 +8,7 @@ class GameForm(Form):
     opponent = StringField("Opponent", validators=[Length(min=2, max=32)])
     botnia_goals = IntegerField("Botnia's goals", validators=[NumberRange(min=0)])
     opponent_goals = IntegerField("Opponent's goals", validators=[NumberRange(min=0)])
+    
 
     class Meta:
         csrf = False

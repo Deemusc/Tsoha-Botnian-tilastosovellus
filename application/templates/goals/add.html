@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('goals_create') }}">
+    {{ form.hidden_tag() }}
+<table>
+        <td>
+                {{ form.scorer_number.label }}
+            </td>
+            <td>
+                {{ form.scorer_number }}
+            </td>>
+            <td>                
+                <ul>
+                    {% for error in form.scorer_number.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td> 
+            <td>
+                    {{ form.assist_number.label }}
+                </td>
+                <td>
+                    {{ form.assist_number }}
+                </td>>
+                <td>                
+                    <ul>
+                        {% for error in form.assist_number.errors %}
+                        <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </td> 
+            <td colspan="3">
+                <input type="submit" value="Add goals"/>
+            </td>
+        </tr>
+    </table>
+</form>
+{% endblock %}

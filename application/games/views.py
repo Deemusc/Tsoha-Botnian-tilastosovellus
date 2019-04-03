@@ -4,6 +4,9 @@ from flask_login import login_required, current_user
 from application import app, db
 from application.games.models import Game
 from application.games.forms import GameForm, queryGameForm
+from application.goals.models import Goal
+from application.goals.forms import GoalForm
+from application.goals.views import goals_add
 
 #pelien listaus
 @app.route("/games/", methods=["GET"])
@@ -27,7 +30,7 @@ def games_query():
 
 # Uuden pelin luominen.
 @app.route("/games/new/", methods=["GET", "POST"])
-@login_required
+#@login_required
 def games_create():
     error = None
     form = GameForm()
@@ -35,12 +38,14 @@ def games_create():
         try:
             g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=form.botnia_goals.data, opponent_goals=form.opponent_goals.data)
             db.session.add(g)
+            #db.session.flush()
+            #print(g.id)
             db.session.commit()
-            flash("game added")
+            flash("game added")            
         except Exception as e:
             error = e 
         # tarkoitus olisi ottelun perustietojen jälkeen päästä sivulle, jossa voidaan syöttää kyseisen pelin maalien tiedot
-        return redirect(url_for("goals_add"))
+        return redirect(url_for("goals_add", game_id = g.id))
     return render_template("/games/new.html", form = form, error = error)   
 
 # Pelin muokkaaminen
