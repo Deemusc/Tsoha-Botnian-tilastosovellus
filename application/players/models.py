@@ -10,3 +10,15 @@ class Player(db.Model):
     def __init__(self, name, number):
         self.name = name
         self.number = number
+
+    @staticmethod
+    def list_goal_scorers():
+        stmt = text("SELECT number, name, COUNT(scorer_id) FROM Player"
+                    " JOIN Goal ON scorer_id=player.id;")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"name":row[1], "goals":row[2]})
+
+        return response

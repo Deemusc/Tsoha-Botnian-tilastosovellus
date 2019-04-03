@@ -17,7 +17,7 @@ def goals_add(game_id):
     game = Game.query.filter_by(id=game_id).first_or_404()
     goalsToAdd = game.botnia_goals
     print(goalsToAdd)
-    #print('form:', form)
+    
     if form.validate_on_submit():
         try:
             s = Player.query.filter_by(number=form.scorer_number.data).first_or_404()
