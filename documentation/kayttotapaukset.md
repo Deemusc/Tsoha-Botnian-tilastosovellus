@@ -16,7 +16,7 @@ Ottelut voidaan listata lisäämisjärjestyksessään linkin *List games* takaa.
 
 ## Ottelun lisääminen tietokantaan
 
-Uusi ottelu lisätään tilastoihin *Add a game* -linkistä. Ottelulle annetaan päivämäärä, vastustajan nimi, Botnian tekemien maalien määrä sekä vastustajan tekemien maalien määrä. Uusi ottelu lisätään tietokantatauluun **game**.
+Uusi ottelu lisätään tilastoihin *Add a game* -linkistä. Ottelulle annetaan päivämäärä, vastustajajoukkueen nimi sekä vastustajan tekemien maalien määrä. Uusi ottelu lisätään tietokantatauluun **game**. Seuraavaksi siirrytään sivulle, jossa syötetään Botnian ottelussa tekemät maalit. Maalille annetaan maalintekijän numero ja syöttäjän numero. Maali lisätään napista *Add goal*. Uusia maaleja syötetään yksi kerrallaan, kunnes kaikki maalit on syötetty, jolloin siirrytään otteluiden listaukseen *Finish*-napilla.
 
 ## Otteluiden haku ja muokkaaminen tai poistaminen
 
