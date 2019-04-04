@@ -1,0 +1,18 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th># </th>
+        <th>Player</th>
+        <th>Goals</th>
+    </tr>
+    {% for scorer in scorers %}
+    <tr>
+        <td>{{ scorer.number }}</td>
+        <td>{{ scorer.name }}</td>        
+        <td>{{ scorer.goals }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

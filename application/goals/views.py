@@ -13,8 +13,8 @@ from application.players.models import Player
 def goals_add(game_id):
     error = None
     form = GoalForm(game_id = game_id)
+    all_goals = Goal.query.all()
     game = Game.query.filter_by(id=game_id).first_or_404()
-    #goalsToAdd = game.botnia_goals
 
     if form.validate_on_submit():
         try:
@@ -26,7 +26,7 @@ def goals_add(game_id):
             flash("goal added")
         except Exception as e:
             error = e
-    return render_template("/goals/add.html", form = form, error = error)
+    return render_template("/goals/add.html", form = form, error = error, all_goals=all_goals)
 
 @app.route("/goals/add/<game_id>", methods=["GET", "POST"])
 #@login required

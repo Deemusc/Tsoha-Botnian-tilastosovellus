@@ -11,6 +11,13 @@ def players_index():
     p = Player.query.all()
     return render_template("/players/list.html", players=p)
 
+# Maalipörssi. Listataan järjestyksessä kaikki pelaajat, jotka ovat tehneet maaleja.
+@app.route("/players/scorers/", methods=["GET"])
+#@login_required
+def players_scorers():
+    s = Player.list_goal_scorers()
+    return render_template("/players/scorers.html", scorers=s)
+
 # Pelaajien haku-sivu, toimii mukavasti.
 @app.route("/players/query/", methods=["GET", "POST"])
 @login_required
