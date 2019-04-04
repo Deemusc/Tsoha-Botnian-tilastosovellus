@@ -29,13 +29,11 @@ def goals_add(game_id):
     return render_template("/goals/add.html", form = form, error = error, all_goals=all_goals)
 
 @app.route("/goals/add/<game_id>", methods=["GET", "POST"])
-@login required
+@login_required
 def goals_finish(game_id):
     error = None
-    #print('lollero')
     game = Game.query.filter_by(id=game_id).first_or_404()
     goals_in_game = Goal.find_amount_of_goals_in_game(game_id)
-    print(goals_in_game)
     game.botnia_goals = goals_in_game
     db.session.commit()
 
