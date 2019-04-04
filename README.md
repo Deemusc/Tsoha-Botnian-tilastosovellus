@@ -7,7 +7,7 @@ Laaditaan tilastosovellus, johon merkitään joukkueen otteluiden tuloksia ja pe
 
 Otteluista pidetään kirjaa, yksittäisestä ottelusta tiedetään päivämäärä, joukkueet ja lopputulos. Ottelusta tiedetään myös siinä syntyneet Botnian maalit: maalintekijä ja syöttäjä sekä Botnian ottamat jäähyt. Myös ottelussa pelanneet Botnian pelaajat tiedetään. Pelaajasta tiedetään nimi ja pelinumero. Tiedoista saadaan koostettua pistepörssi, josta voidaan tarkastella pelaajia, heidän pelaamiaan otteluita sekä niissä tehtyjä pisteitä.
 
-[Sovellus Herokussa](https://tsoha-botnian-tilastosovellus.herokuapp.com/)
+[Sovellus Herokussa](https://tsoha-botnian-tilastosovellus.herokuapp.com/) **Huom. PostgreSQL ei näytä tykkäävän SQL-kyselyistäni, joten monimutkaisemmat kyselyt eivät toimi Herokussa tällä hetkellä. Korjaus on työn alla.**
 
 ### Käyttötapauskuvauksia
 
