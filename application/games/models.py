@@ -13,4 +13,6 @@ class Game(db.Model):
         self.opponent = opponent
         self.botnia_goals = botnia_goals
         self.opponent_goals = opponent_goals
-        
+
+
+ 

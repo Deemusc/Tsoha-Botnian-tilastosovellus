@@ -36,15 +36,13 @@ def games_create():
     form = GameForm()
     if form.validate_on_submit():
         try:
-            g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=form.botnia_goals.data, opponent_goals=form.opponent_goals.data)
-            db.session.add(g)
-            #db.session.flush()
-            #print(g.id)
+            g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=0, opponent_goals=form.opponent_goals.data)
+            db.session.add(g)            
             db.session.commit()
             flash("game added")            
         except Exception as e:
             error = e 
-        # tarkoitus olisi ottelun perustietojen jälkeen päästä sivulle, jossa voidaan syöttää kyseisen pelin maalien tiedot
+        # Pelin luominen jatkuu maalien yksityiskohtien syöttämisellä.
         return redirect(url_for("goals_add", game_id = g.id))
     return render_template("/games/new.html", form = form, error = error)   
 

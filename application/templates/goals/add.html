@@ -4,12 +4,10 @@
 <form method="POST" action="{{ url_for('goals_add', game_id=form.game_id.data) }}">
     {{ form.hidden_tag() }}
 <table>
-    {% for i in range(goalsToAdd) %}
+
     <tr>
-        <td>
-            {{ i + 1 }}. goal:
-        </td>
-        <td>
+
+            <td>
                 {{ form.scorer_number.label }}
             </td>
             <td>
@@ -23,25 +21,29 @@
                 </ul>
             </td> 
             <td>
-                    {{ form.assist_number.label }}
-                </td>
-                <td>
-                    {{ form.assist_number }}
-                </td>
-                <td>                
-                    <ul>
-                        {% for error in form.assist_number.errors %}
-                        <li>{{ error }}</li>
-                        {% endfor %}
-                    </ul>
-        </td> 
-        </tr>
-        {% endfor %}
-        <tr>    
-        <td colspan="3">
-                <input type="submit" value="Add goals"/>
+                {{ form.assist_number.label }}
             </td>
-        </tr>
-    </table>
+            <td>
+                {{ form.assist_number }}
+            </td>
+            <td>                
+                <ul>
+                    {% for error in form.assist_number.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td colspan="3">
+                <input type="submit" value="Add goal"/>
+            </td> 
+    </tr>    
+    <tr>
+        <td>
+            <a class="btn btn-primary" href="{{ url_for('goals_finish', game_id=form.game_id.data) }}">Finish</a>
+        </td>
+    </tr>
+
+</table>
 </form>
+
 {% endblock %}
