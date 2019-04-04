@@ -9,7 +9,7 @@ from application.players.models import Player
 
 
 @app.route("/goals/<game_id>", methods=["GET", "POST"])
-#@login_required
+@login_required
 def goals_add(game_id):
     error = None
     form = GoalForm(game_id = game_id)
@@ -29,7 +29,7 @@ def goals_add(game_id):
     return render_template("/goals/add.html", form = form, error = error, all_goals=all_goals)
 
 @app.route("/goals/add/<game_id>", methods=["GET", "POST"])
-#@login required
+@login required
 def goals_finish(game_id):
     error = None
     #print('lollero')
@@ -41,14 +41,3 @@ def goals_finish(game_id):
 
 
     return redirect(url_for("games_index"))    
-    
-    
-    
-
-# ---------- tätä ei juuri nyt tarvita --------
-#@app.route("/goals/<game_id>", methods=["GET", "POST"])
-#@login_required
-#def goals_create(game_id):
-#    game = Game.query.filter_by(id=game_id).first_or_404()
-#    goalsToAdd = game.botnia_goals
-

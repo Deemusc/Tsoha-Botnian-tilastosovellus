@@ -30,7 +30,7 @@ def games_query():
 
 # Uuden pelin luominen.
 @app.route("/games/new/", methods=["GET", "POST"])
-#@login_required
+@login_required
 def games_create():
     error = None
     form = GameForm()
