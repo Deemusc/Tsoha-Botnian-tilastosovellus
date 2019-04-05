@@ -14,11 +14,11 @@ class Player(db.Model):
 
     @staticmethod
     def list_goal_scorers():
-        stmt = text("SELECT Player.number, Player.name, COUNT(Goal.scorer_id)"
+        stmt = text("SELECT Player.number, Player.name, COUNT(Goal.scorer_id) AS goals"
                     " FROM Player"
                     " INNER JOIN Goal ON Goal.scorer_id=Player.id"
-                    " GROUP BY Goal.scorer_id"
-                    " ORDER BY COUNT(Goal.scorer_id) DESC;")
+                    " GROUP BY (Player.number, Player.name, Goal.scorer_id)"
+                    " ORDER BY goals DESC;")
         res = db.engine.execute(stmt)
 
         response = []
