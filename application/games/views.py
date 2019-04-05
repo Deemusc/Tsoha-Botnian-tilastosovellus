@@ -57,7 +57,6 @@ def games_edit(id):
         try:
             g.date = form.date.data
             g.opponent = form.opponent.data
-            g.botnia_goals = form.botnia_goals.data
             g.opponent_goals = form.opponent_goals.data
             db.session.commit()
             flash("Game info updated")
