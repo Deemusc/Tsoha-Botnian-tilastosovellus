@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
-from application import app, db
+from application import app, db, login_required
 from application.games.models import Game
 from application.games.forms import GameForm, queryGameForm
 from application.goals.models import Goal
@@ -30,13 +30,14 @@ def games_query():
 
 # Uuden pelin luominen.
 @app.route("/games/new/", methods=["GET", "POST"])
-@login_required
+@login_required(role="ADMIN")
 def games_create():
     error = None
     form = GameForm()
     if form.validate_on_submit():
         try:
             g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=0, opponent_goals=form.opponent_goals.data)
+            g.account_id = current_user.id
             db.session.add(g)            
             db.session.commit()
             flash("game added")            

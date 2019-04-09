@@ -6,6 +6,9 @@ class Game(db.Model):
     opponent = db.Column(db.String(32), nullable=False)
     botnia_goals = db.Column(db.Integer, nullable=False)
     opponent_goals = db.Column(db.Integer, nullable=False)
+
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
+
     goals = db.relationship('Goal', backref="game", lazy=True)
 
     def __init__(self, date, opponent, botnia_goals, opponent_goals):

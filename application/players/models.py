@@ -17,7 +17,7 @@ class Player(db.Model):
         stmt = text("SELECT Player.number, Player.name, COUNT(Goal.scorer_id) AS goals"
                     " FROM Player"
                     " INNER JOIN Goal ON Goal.scorer_id=Player.id"
-                    " GROUP BY (Player.number, Player.name, Goal.scorer_id)"
+                    " GROUP BY Player.number, Player.name, Goal.scorer_id"
                     " ORDER BY goals DESC;")
         res = db.engine.execute(stmt)
 
