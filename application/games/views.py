@@ -36,6 +36,7 @@ def games_query():
 def games_create():
     error = None
     form = GameForm()
+    #players = Player.query.all()
     if form.validate_on_submit():
         try:
             g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=0, opponent_goals=form.opponent_goals.data)

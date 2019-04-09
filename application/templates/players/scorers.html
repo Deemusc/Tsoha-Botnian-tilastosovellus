@@ -15,4 +15,18 @@
     </tr>
     {% endfor %}
 </table>
+<table>
+    <tr>
+        <th># </th>
+        <th>Player</th>
+        <th>Assists</th>        
+    </tr>
+    {% for assist in assists %}
+    <tr>
+        <td>{{ assist.number }}</td>
+        <td>{{ assist.name }}</td>
+        <td>{{ assist.assists }}</td>
+    </tr>
+    {% endfor %}
+</table>
 {% endblock %}

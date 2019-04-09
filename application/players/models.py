@@ -37,6 +37,22 @@ class Player(db.Model):
 
         return response
 
+    @staticmethod
+    def list_assists():
+        stmt = text("SELECT Player.number, Player.name, COUNT(Goal.assist_id) AS assists"
+                    " FROM Player"
+                    " INNER JOIN Goal ON Goal.assist_id=Player.id"
+                    " GROUP BY Player.number, Player.name, Goal.assist_id"
+                    " ORDER BY assists DESC;")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"number":row[0], "name":row[1], "assists":row[2]})
+
+        return response
+
+
 '''
 Kehitelmä varatun numeron tunnistamiseen
 
