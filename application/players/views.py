@@ -15,7 +15,7 @@ def players_index():
 
 # Maalipörssi. Listataan järjestyksessä kaikki pelaajat, jotka ovat tehneet maaleja.
 @app.route("/players/scorers/", methods=["GET"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def players_scorers():
     s = Player.list_goal_scorers()
     return render_template("/players/scorers.html", scorers=s)
@@ -55,7 +55,7 @@ def players_create():
 
 # Pelaajan muokkaaminen, siirtää käyttäjän pelaajien listaukseen.
 @app.route("/players/edit/<int:id>/", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def players_edit(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()
@@ -73,7 +73,7 @@ def players_edit(id):
 
 # Pelaajan poistaminen.
 @app.route("/players/delete/<int:id>/", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def players_delete(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()

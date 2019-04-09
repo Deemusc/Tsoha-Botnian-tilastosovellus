@@ -9,9 +9,9 @@ class Player(db.Model):
 
     def __init__(self, name, number):
         self.name = name
-        self.number = number
+        self.number = number 
 
- 
+
 
     @staticmethod
     def list_goal_scorers():

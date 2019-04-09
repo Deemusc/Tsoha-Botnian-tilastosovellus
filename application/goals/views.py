@@ -6,10 +6,13 @@ from application.goals.models import Goal
 from application.goals.forms import GoalForm
 from application.games.models import Game
 from application.players.models import Player
+from application.penalties.models import Penalty
+from application.penalties.forms import PenaltyForm
+from application.penalties.views import penalties_add
 
 
 @app.route("/goals/<game_id>", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def goals_add(game_id):
     error = None
     form = GoalForm(game_id = game_id)
@@ -28,7 +31,7 @@ def goals_add(game_id):
     return render_template("/goals/add.html", form = form, error = error)
 
 @app.route("/goals/add/<game_id>", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def goals_finish(game_id):
     error = None
     game = Game.query.filter_by(id=game_id).first_or_404()
@@ -36,5 +39,5 @@ def goals_finish(game_id):
     game.botnia_goals = goals_in_game
     db.session.commit()
 
-
-    return redirect(url_for("games_index"))    
+    return redirect(url_for("penalties_add", game_id = game.id))
+        

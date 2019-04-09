@@ -17,7 +17,7 @@ def games_index():
 
 # pelien hakutoiminto, atm vain vastustajan nimellä
 @app.route("/games/query/", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def games_query():
     error = None
     form = queryGameForm()
@@ -31,7 +31,7 @@ def games_query():
 
 # Uuden pelin luominen.
 @app.route("/games/new/", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def games_create():
     error = None
     form = GameForm()
@@ -50,7 +50,7 @@ def games_create():
 
 # Pelin muokkaaminen
 @app.route("/games/edit/<int:id>/", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def games_edit(id):
     error = None
     g = Game.query.filter_by(id=id).first_or_404()
@@ -69,7 +69,7 @@ def games_edit(id):
 
 # Pelin poistaminen
 @app.route("/games/delete/<int:id>/", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required(role="REGULAR")
 def games_delete(id):
     error = None
     g = Game.query.filter_by(id=id).first_or_404()

@@ -17,7 +17,7 @@ players = db.Table("players",
 db.Index("roster", players.c.game_id, players.c.player_id, unique = True)
 
 class Game(db.Model):
-    id = db.Column(db.Integer, primary_key=True, autoincrement=True)
+    id = db.Column(db.Integer, primary_key=True)
     date = db.Column(db.Date, nullable=False)
     opponent = db.Column(db.String(32), nullable=False)
     botnia_goals = db.Column(db.Integer, nullable=False)
