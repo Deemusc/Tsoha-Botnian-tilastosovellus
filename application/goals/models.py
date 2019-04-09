@@ -1,10 +1,11 @@
 from application import db
 from sqlalchemy.sql import text
 
+# varsinainen maalia kuvaava luokka
 class Goal(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
-    game_id = db.Column(db.Integer, db.ForeignKey('game.id'), nullable=False)
-    scorer_id = db.Column(db.Integer, nullable=False)
+    game_id = db.Column(db.Integer, nullable=False)
+    scorer_id = db.Column(db.Integer, db.ForeignKey('player.id'), nullable=False)
     assist_id = db.Column(db.Integer, nullable=False)
 
     def __init__(self, game_id, scorer_id, assist_id):
@@ -12,6 +13,7 @@ class Goal(db.Model):
         self.scorer_id = scorer_id
         self.assist_id = assist_id
     
+    # metodi, jolla lasketaan pelin maalit lisättyjen maalimerkintöjen perusteella
     @staticmethod
     def find_amount_of_goals_in_game(game_id):
         stmt = text("SELECT COUNT(game_id) FROM Goal"

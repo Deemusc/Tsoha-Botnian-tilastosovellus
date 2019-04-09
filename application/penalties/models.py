@@ -1,5 +1,7 @@
 from application import db
 from sqlalchemy.sql import text
+from sqlalchemy import Table, Column, Integer, ForeignKey
+from sqlalchemy.orm import relationship
 
 class Penalty(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)

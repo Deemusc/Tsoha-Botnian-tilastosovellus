@@ -4,7 +4,6 @@ from flask_login import login_required, current_user
 from application import app, db, login_required
 from application.players.models import Player
 from application.players.forms import PlayerForm, queryForm
-from application.games.models import Players
 
 # Pelaajien listaus. Tavallinen käyttäjä voi tarkastella listaa.
 @app.route("/players/", methods=["GET"])
