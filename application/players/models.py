@@ -37,4 +37,17 @@ class Player(db.Model):
 
         return response
 
-        
+'''
+Kehitelmä varatun numeron tunnistamiseen
+
+    @staticmethod
+    def list_used_numbers():
+        stmt = text("SELECT Player.number FROM Player;")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"number":row[0]})
+
+        return response
+'''

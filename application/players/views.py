@@ -43,7 +43,7 @@ def players_create():
     if form.validate_on_submit():
         try:
             p = Player(number=form.number.data, name=form.name.data)
-            p.account_id = current_user.id
+            #p.account_id = current_user.id
             db.session.add(p)
             db.session.commit()
             flash("Player added")            
