@@ -21,8 +21,9 @@ def games_index():
 def games_query():
     error = None
     form = queryGameForm()
+    n = form.opponent.data + "%"  
     if form.validate_on_submit():
-        g = Game.query.filter_by(opponent=form.opponent.data).all()
+        g = Game.query.filter(Game.opponent.like(n)).all()
         if g:
             return render_template("/games/query.html", form=form, games=g)
         else:
