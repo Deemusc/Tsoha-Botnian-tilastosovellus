@@ -1,31 +1,34 @@
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
-from application import app, db
+from application import app, db, login_required
 from application.players.models import Player
 from application.players.forms import PlayerForm, queryForm
+from application.games.models import Players
 
-# Pelaajien listaus.
+# Pelaajien listaus. Tavallinen käyttäjä voi tarkastella listaa.
 @app.route("/players/", methods=["GET"])
+@login_required(role="REGULAR")
 def players_index():
     p = Player.query.all()
     return render_template("/players/list.html", players=p)
 
 # Maalipörssi. Listataan järjestyksessä kaikki pelaajat, jotka ovat tehneet maaleja.
 @app.route("/players/scorers/", methods=["GET"])
-@login_required
+@login_required(role="ADMIN")
 def players_scorers():
     s = Player.list_goal_scorers()
     return render_template("/players/scorers.html", scorers=s)
 
 # Pelaajien haku-sivu, toimii mukavasti.
 @app.route("/players/query/", methods=["GET", "POST"])
-@login_required
+@login_required(role="REGULAR")
 def players_query():
     error = None
     form = queryForm()
     if form.validate_on_submit():
-        p = Player.query.filter_by(name=form.name.data).all()
+        n = form.name.data + "%"  
+        p = Player.query.filter(Player.name.like(n)).all()        
         if p:
             return render_template("/players/query.html", form=form, players=p)
         else:
@@ -34,7 +37,7 @@ def players_query():
 
 # Uuden pelaajan luominen, siirtää käyttäjän pelaajien listaukseen.
 @app.route("/players/new/", methods=["GET", "POST"])
-@login_required
+@login_required(role="REGULAR")
 def players_create():
     error = None
     form = PlayerForm()
@@ -52,7 +55,7 @@ def players_create():
 
 # Pelaajan muokkaaminen, siirtää käyttäjän pelaajien listaukseen.
 @app.route("/players/edit/<int:id>/", methods=["GET", "POST"])
-@login_required
+@login_required(role="ADMIN")
 def players_edit(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()
@@ -70,7 +73,7 @@ def players_edit(id):
 
 # Pelaajan poistaminen.
 @app.route("/players/delete/<int:id>/", methods=["GET", "POST"])
-@login_required
+@login_required(role="ADMIN")
 def players_delete(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()

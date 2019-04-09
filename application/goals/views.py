@@ -1,7 +1,7 @@
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
-from application import app, db
+from application import app, db, login_required
 from application.goals.models import Goal
 from application.goals.forms import GoalForm
 from application.games.models import Game
@@ -9,7 +9,7 @@ from application.players.models import Player
 
 
 @app.route("/goals/<game_id>", methods=["GET", "POST"])
-@login_required
+@login_required(role="ADMIN")
 def goals_add(game_id):
     error = None
     form = GoalForm(game_id = game_id)
@@ -28,7 +28,7 @@ def goals_add(game_id):
     return render_template("/goals/add.html", form = form, error = error)
 
 @app.route("/goals/add/<game_id>", methods=["GET", "POST"])
-@login_required
+@login_required(role="ADMIN")
 def goals_finish(game_id):
     error = None
     game = Game.query.filter_by(id=game_id).first_or_404()

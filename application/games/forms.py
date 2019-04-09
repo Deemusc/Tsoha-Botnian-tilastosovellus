@@ -1,19 +1,17 @@
-from flask_wtf import Form
-from wtforms import IntegerField, DateField, StringField
-from wtforms.validators import NumberRange, Length, DataRequired
+from flask_wtf import FlaskForm
+from wtforms import IntegerField, DateField, StringField, validators
 
-class GameForm(Form):
+class GameForm(FlaskForm):
     id = IntegerField("ID")
-    date = DateField("Date (yyyy-mm-dd)", validators=[DataRequired(message="Insert date as yyyy-mm-dd.")])
-    opponent = StringField("Opponent", validators=[Length(min=2, max=32)])
-    opponent_goals = IntegerField("Opponent's goals", validators=[NumberRange(min=0)])
-    #botnia_goals = IntegerField("Add goal for Botnia", validators=[NumberRange(min=0)])
+    date = DateField("Date (yyyy-mm-dd)", [validators.DataRequired(message="Insert date as yyyy-mm-dd.")])
+    opponent = StringField("Opponent", [validators.Length(min=2, max=32, message="Name is too short or long (2-32 characters).")])
+    opponent_goals = IntegerField("Opponent's goals", [validators.NumberRange(min=0, message="Amount of goals can't be negative.")])
 
     class Meta:
         csrf = False
 
-class queryGameForm(Form):
-    opponent = StringField("Opponent's name", validators=[Length(min=2, max=32)])
+class queryGameForm(FlaskForm):
+    opponent = StringField("Opponent's name", [validators.Length(min=1, max=32, message="Enter at least one character (maximum is 32).")])
 
     class Meta:
         csrf = False

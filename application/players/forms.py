@@ -1,17 +1,16 @@
-from flask_wtf import Form
-from wtforms import StringField, IntegerField
-from wtforms.validators import NumberRange, Length
+from flask_wtf import FlaskForm
+from wtforms import StringField, IntegerField, validators
 
-class PlayerForm(Form):
+class PlayerForm(FlaskForm):
     id = IntegerField("ID")
-    number = IntegerField("Player's number", validators=[NumberRange(min=1, max=99)])
-    name = StringField("Player's name", validators=[Length(min=3)])
+    number = IntegerField("Player's number", [validators.NumberRange(min=1, max=99)])
+    name = StringField("Player's name", [validators.Length(min=3)])
 
     class Meta:
         csrf = False
 
-class queryForm(Form):
-    name = StringField("Player's name", validators=[Length(min=3)])
+class queryForm(FlaskForm):
+    name = StringField("Player's name", [validators.Length(min=1)])
 
     class Meta:
         csrf = False
