@@ -11,11 +11,11 @@ Sovellus pitää otteluista kirjaa. Yksittäisestä ottelusta tiedetään päiv�
 
 ### Dokumentaatio
 
-[Asennus- ja käyttöohje]()
+[Asennus- ja käyttöohje](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/asennus-_ja_kaytto-ohje.md)
 
 [Käyttötapaukset](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/kayttotapaukset.md)
 
-[Rajoitteet ja puutteet]()
+[Rajoitteet ja puutteet](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/rajoitteet_ja_puutteet.md)
 
-[Tietokantarakenne]()
+[Tietokantarakenne](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantarakenne.md)
 
