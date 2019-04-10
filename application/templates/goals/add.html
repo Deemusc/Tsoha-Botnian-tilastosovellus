@@ -3,7 +3,7 @@
 {% block body %}
 <form method="POST" action="{{ url_for('goals_add', game_id=form.game_id.data) }}">
     {{ form.hidden_tag() }}
-<table>
+    <table>
     <tr>
             <td>
                 {{ form.scorer_number.label }}

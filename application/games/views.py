@@ -11,19 +11,19 @@ from application.goals.views import goals_add
 
 #pelien listaus
 @app.route("/games/", methods=["GET"])
-@login_required(role="REGULAR" or "ADMIN")
+@login_required(role="ADMIN")
 def games_index():
     g = Game.query.all()
     return render_template("/games/list.html", games=g)
 
 # pelien hakutoiminto, atm vain vastustajan nimellä
 @app.route("/games/query/", methods=["GET", "POST"])
-@login_required(role="REGULAR" or "ADMIN")
+@login_required(role="ADMIN")
 def games_query():
     error = None
     form = queryGameForm()
-    n = form.opponent.data + "%"  
     if form.validate_on_submit():
+        n = form.opponent.data + "%" 
         g = Game.query.filter(Game.opponent.like(n)).all()
         if g:
             return render_template("/games/query.html", form=form, games=g)
@@ -41,7 +41,6 @@ def games_create():
     if form.validate_on_submit():
         try:
             g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=0, opponent_goals=form.opponent_goals.data)
-            #g.account_id = current_user.id
             db.session.add(g)            
             db.session.commit()
             flash("game added")            

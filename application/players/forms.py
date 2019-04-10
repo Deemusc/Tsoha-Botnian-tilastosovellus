@@ -14,3 +14,5 @@ class queryForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+#class addToGameForm(FlaskForm):

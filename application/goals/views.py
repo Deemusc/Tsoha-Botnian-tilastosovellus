@@ -21,7 +21,7 @@ def goals_add(game_id):
     if form.validate_on_submit():
         try:
             s = Player.query.filter_by(number=form.scorer_number.data).first_or_404()
-            a = Player.query.filter_by(number=form.assist_number.data).first_or_404()
+            a = Player.query.filter_by(number=form.assist_number.data).first_or_404()                   
             g = Goal(game_id=game_id, scorer_id=s.id, assist_id=a.id)            
             db.session.add(g)
             db.session.commit()

@@ -7,14 +7,14 @@ from application.players.forms import PlayerForm, queryForm
 
 # Pelaajien listaus. Tavallinen käyttäjä voi tarkastella listaa.
 @app.route("/players/", methods=["GET"])
-@login_required(role="REGULAR" or "ADMIN")
+@login_required(role="ADMIN")
 def players_index():
     p = Player.query.all()
     return render_template("/players/list.html", players=p)
 
 # Maalipörssi. Listataan järjestyksessä kaikki pelaajat, jotka ovat tehneet maaleja.
 @app.route("/players/scorers/", methods=["GET"])
-@login_required(role="REGULAR" or "ADMIN")
+@login_required(role="ADMIN")
 def players_scorers():
     s = Player.list_goal_scorers()
     a = Player.list_assists()
@@ -22,7 +22,7 @@ def players_scorers():
 
 # Pelaajien haku-sivu, toimii mukavasti.
 @app.route("/players/query/", methods=["GET", "POST"])
-@login_required(role="REGULAR" or "ADMIN")
+@login_required(role="ADMIN")
 def players_query():
     error = None
     form = queryForm()
@@ -44,7 +44,6 @@ def players_create():
     if form.validate_on_submit():
         try:
             p = Player(number=form.number.data, name=form.name.data)
-            #p.account_id = current_user.id
             db.session.add(p)
             db.session.commit()
             flash("Player added")            

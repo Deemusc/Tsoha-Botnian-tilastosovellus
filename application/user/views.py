@@ -22,4 +22,4 @@ def user_signup():
         return redirect(url_for("auth_login"))    
     return render_template("/user/new.html", form = form, error = error)   
 
-# tehdään myöhemmin toiminnallisuus admin-käyttäjän lisäämiseen
+# tehdään myöhemmin toiminnallisuus toisen tyyppisen käyttäjän lisäämiseen
