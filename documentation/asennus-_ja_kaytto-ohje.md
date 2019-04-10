@@ -6,6 +6,8 @@ Sovellus toimii Herokun palvelimella Internetissä. Se on käytettävissä selai
 
 ## Käyttöohje
 
+Sovelluksessa on kahdentyyppisiä käyttäjiä, admin- ja peruskäyttäjät. Admin-käyttäjä voi käyttää kaikkia sovelluksen toiminnallisuuksia ja peruskäyttäjä voi listata pelaajia ja otteluita, hakea niitä sekä tarkastella tilastoja.
+
 ### Kirjautuminen ja uuden tunnuksen luominen
 
 Sovellukseen kirjaudutaan sisään oikean reunan *Log in* -painikkeesta. Viereisestä *Sign up* -painikkeesta voi luoda uuden peruskäyttäjän. Samassa kohtaa lukee sisäänkirjautuneen käyttäjän nimi ja on mahdollisuus kirjautua ulos.
