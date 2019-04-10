@@ -4,6 +4,17 @@
 <table>
     <tr>
         <th># </th>
+        <th>Player's name</th>
+        <th>Games played</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Points</th>
+        <th>Penalty minutes</th>
+    </tr>
+</table>
+<table>
+    <tr>
+        <th># </th>
         <th>Player</th>
         <th>Goals</th>
     </tr>
@@ -40,6 +51,20 @@
             <td>{{ game.number }}</td>
             <td>{{ game.name }}</td>
             <td>{{ game.games }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+    <table>
+        <tr>
+            <th># </th>
+            <th>Player</th>
+            <th>Penalty minutes</th>
+        </tr>
+        {% for penalty in penalties %}
+        <tr>
+            <td>{{ penalty.number }}</td>
+            <td>{{ penalty.name }}</td>        
+            <td>{{ penalty.penalties }}</td>
         </tr>
         {% endfor %}
     </table>

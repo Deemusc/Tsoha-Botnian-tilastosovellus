@@ -19,7 +19,8 @@ def players_scorers():
     s = Player.list_goal_scorers()
     a = Player.list_assists()
     g = Player.list_games()
-    return render_template("/players/scorers.html", scorers=s, assists=a, games=g)
+    p = Player.list_penalties()
+    return render_template("/players/scorers.html", scorers=s, assists=a, games=g, penalties=p)
 
 # Pelaajien haku-sivu, toimii mukavasti.
 @app.route("/players/query/", methods=["GET", "POST"])

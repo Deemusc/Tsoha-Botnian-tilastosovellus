@@ -67,6 +67,21 @@ class Player(db.Model):
 
         return response
 
+    @staticmethod
+    def list_penalties():
+        stmt = text("SELECT Player.number, Player.name, SUM(Penalty.minutes) AS penalties"
+                    " FROM Player"
+                    " INNER JOIN Penalty ON Penalty.player_id=Player.id"
+                    " GROUP BY Player.number, Player.name, Penalty.player_id"
+                    " ORDER BY penalties DESC;")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"number":row[0], "name":row[1], "penalties":row[2]})
+
+        return response
+
 '''
 Kehitelmä varatun numeron tunnistamiseen
 
