@@ -11,14 +11,14 @@ from application.goals.views import goals_add
 
 #pelien listaus
 @app.route("/games/", methods=["GET"])
-@login_required(role="ADMIN")
+@login_required()
 def games_index():
     g = Game.query.all()
     return render_template("/games/list.html", games=g)
 
 # pelien hakutoiminto, atm vain vastustajan nimellä
 @app.route("/games/query/", methods=["GET", "POST"])
-@login_required(role="ADMIN")
+@login_required()
 def games_query():
     error = None
     form = queryGameForm()
