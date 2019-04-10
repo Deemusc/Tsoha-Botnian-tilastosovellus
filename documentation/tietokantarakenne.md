@@ -1,3 +1,9 @@
+# Tietokannan rakenne
+
+## Tietokantakaavio
+
+(https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_kuvana.png)
+
 ## Tietokantakaavio tekstimuodossa
 
 [Player|(pk)id:Integer;name:String;number:Integer]
