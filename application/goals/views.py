@@ -17,6 +17,10 @@ def goals_add(game_id):
     error = None
     form = GoalForm(game_id = game_id)
     game = Game.query.filter_by(id=game_id).first_or_404()
+    
+    #players = game.players
+    #form.scorer_number.choices=[(p.id, p.name) for p in players]
+    #form.assist_number.choices=[(p.id, p.name) for p in players]
 
     if form.validate_on_submit():
         try:

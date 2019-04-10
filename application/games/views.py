@@ -71,16 +71,6 @@ def games_roster(game_id):
             error = e
     return render_template("/games/roster.html", form = form, error = error, players = p)
 
-'''
-@app.route("/games/roster/add/<game_id>", methods=["GET", "POST"])
-@login_required(role="ADMIN")
-def games_roster_finish(game_id, players):
-    game = Game.query.filter_by(id=game_id).first_or_404()
-    game.players.append(players)
-    db.session.commit()
-    return redirect(url_for("goals_add", game_id = game.id))
-'''
-
 # Pelin muokkaaminen
 @app.route("/games/edit/<int:id>/", methods=["GET", "POST"])
 @login_required(role="ADMIN")
