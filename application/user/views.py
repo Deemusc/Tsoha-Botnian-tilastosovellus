@@ -13,7 +13,7 @@ def user_signup():
     form = UserForm()
     if form.validate_on_submit():
         try:
-            u = User(name=form.name.data, username=form.username.data, password=form.password.data, role="REGULAR")            
+            u = User(name=form.name.data, username=form.username.data, password=form.password.data, role="ADMIN")            
             db.session.add(u)
             db.session.commit()
             flash("User created")            

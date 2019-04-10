@@ -11,13 +11,14 @@ from application.goals.views import goals_add
 
 #pelien listaus
 @app.route("/games/", methods=["GET"])
+@login_required(role="REGULAR" or "ADMIN")
 def games_index():
     g = Game.query.all()
     return render_template("/games/list.html", games=g)
 
 # pelien hakutoiminto, atm vain vastustajan nimellä
 @app.route("/games/query/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="REGULAR" or "ADMIN")
 def games_query():
     error = None
     form = queryGameForm()
@@ -32,7 +33,7 @@ def games_query():
 
 # Uuden pelin luominen.
 @app.route("/games/new/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def games_create():
     error = None
     form = GameForm()
@@ -52,7 +53,7 @@ def games_create():
 
 # Pelin muokkaaminen
 @app.route("/games/edit/<int:id>/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def games_edit(id):
     error = None
     g = Game.query.filter_by(id=id).first_or_404()
@@ -71,7 +72,7 @@ def games_edit(id):
 
 # Pelin poistaminen
 @app.route("/games/delete/<int:id>/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def games_delete(id):
     error = None
     g = Game.query.filter_by(id=id).first_or_404()

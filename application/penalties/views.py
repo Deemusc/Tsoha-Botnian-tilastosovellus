@@ -13,7 +13,7 @@ from application.players.forms import PlayerForm
 
 
 @app.route("/penalties/<game_id>/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def penalties_add(game_id):
     error = None
     form = PenaltyForm(game_id = game_id)

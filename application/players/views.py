@@ -7,14 +7,14 @@ from application.players.forms import PlayerForm, queryForm
 
 # Pelaajien listaus. Tavallinen käyttäjä voi tarkastella listaa.
 @app.route("/players/", methods=["GET"])
-@login_required(role="REGULAR")
+@login_required(role="REGULAR" or "ADMIN")
 def players_index():
     p = Player.query.all()
     return render_template("/players/list.html", players=p)
 
 # Maalipörssi. Listataan järjestyksessä kaikki pelaajat, jotka ovat tehneet maaleja.
 @app.route("/players/scorers/", methods=["GET"])
-@login_required(role="REGULAR")
+@login_required(role="REGULAR" or "ADMIN")
 def players_scorers():
     s = Player.list_goal_scorers()
     a = Player.list_assists()
@@ -22,7 +22,7 @@ def players_scorers():
 
 # Pelaajien haku-sivu, toimii mukavasti.
 @app.route("/players/query/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="REGULAR" or "ADMIN")
 def players_query():
     error = None
     form = queryForm()
@@ -37,7 +37,7 @@ def players_query():
 
 # Uuden pelaajan luominen, siirtää käyttäjän pelaajien listaukseen.
 @app.route("/players/new/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def players_create():
     error = None
     form = PlayerForm()
@@ -55,7 +55,7 @@ def players_create():
 
 # Pelaajan muokkaaminen, siirtää käyttäjän pelaajien listaukseen.
 @app.route("/players/edit/<int:id>/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def players_edit(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()
@@ -73,7 +73,7 @@ def players_edit(id):
 
 # Pelaajan poistaminen.
 @app.route("/players/delete/<int:id>/", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def players_delete(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()

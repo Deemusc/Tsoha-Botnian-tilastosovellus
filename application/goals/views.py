@@ -12,7 +12,7 @@ from application.penalties.views import penalties_add
 
 
 @app.route("/goals/<game_id>", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def goals_add(game_id):
     error = None
     form = GoalForm(game_id = game_id)
@@ -31,7 +31,7 @@ def goals_add(game_id):
     return render_template("/goals/add.html", form = form, error = error)
 
 @app.route("/goals/add/<game_id>", methods=["GET", "POST"])
-@login_required(role="REGULAR")
+@login_required(role="ADMIN")
 def goals_finish(game_id):
     error = None
     game = Game.query.filter_by(id=game_id).first_or_404()
