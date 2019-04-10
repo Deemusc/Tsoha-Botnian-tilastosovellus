@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, validators
+from wtforms import StringField, IntegerField, RadioField, BooleanField, validators
 
 class PlayerForm(FlaskForm):
     id = IntegerField("ID")
@@ -15,4 +15,6 @@ class queryForm(FlaskForm):
     class Meta:
         csrf = False
 
-#class addToGameForm(FlaskForm):
+class addToGameForm(FlaskForm):
+    game_id = IntegerField("game_id")
+    player_number = IntegerField("Player's number", [validators.NumberRange(min=1, max=99)])

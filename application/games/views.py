@@ -7,6 +7,8 @@ from application.games.forms import GameForm, queryGameForm
 from application.goals.models import Goal
 from application.goals.forms import GoalForm
 from application.goals.views import goals_add
+from application.players.forms import addToGameForm
+from application.players.models import Player
 
 
 #pelien listaus
@@ -37,18 +39,47 @@ def games_query():
 def games_create():
     error = None
     form = GameForm()
-    #players = Player.query.all()
     if form.validate_on_submit():
         try:
             g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=0, opponent_goals=form.opponent_goals.data)
             db.session.add(g)            
             db.session.commit()
-            flash("game added")            
+            flash("game added")
         except Exception as e:
             error = e 
         # Pelin luominen jatkuu maalien yksityiskohtien syöttämisellä.
-        return redirect(url_for("goals_add", game_id = g.id))
+        return redirect(url_for("games_roster", game_id = g.id))
     return render_template("/games/new.html", form = form, error = error)   
+
+# Pelaajien lisääminen tiettyyn peliin.
+@app.route("/games/roster/<game_id>", methods=["GET", "POST"])
+@login_required(role="ADMIN")
+def games_roster(game_id):
+    error = None
+    form = addToGameForm(game_id = game_id)
+    game = Game.query.filter_by(id=game_id).first_or_404()
+    p = Player.query.all()
+    
+    if form.validate_on_submit():
+        try:
+            player = Player.query.filter_by(number=form.player_number.data).first_or_404()                        
+            game.players.append(player)
+            db.session.add(game)
+            db.session.commit()
+            flash("player added")
+        except Exception as e:
+            error = e
+    return render_template("/games/roster.html", form = form, error = error, players = p)
+
+'''
+@app.route("/games/roster/add/<game_id>", methods=["GET", "POST"])
+@login_required(role="ADMIN")
+def games_roster_finish(game_id, players):
+    game = Game.query.filter_by(id=game_id).first_or_404()
+    game.players.append(players)
+    db.session.commit()
+    return redirect(url_for("goals_add", game_id = game.id))
+'''
 
 # Pelin muokkaaminen
 @app.route("/games/edit/<int:id>/", methods=["GET", "POST"])

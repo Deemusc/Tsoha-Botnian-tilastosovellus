@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('games_roster', game_id=form.game_id.data) }}">
+    {{ form.hidden_tag() }}
+    <table>
+            <tr>
+                <td>Select players in this game's roster.</td>
+                </tr>
+                {% for player in players %}
+                <tr>
+                    <td>
+                        {{ player.number }}
+                        {{ player.name }}
+                    </td>                     
+                </tr>
+                {% endfor %}
+                <tr>
+                <td>
+                        {{ form.player_number.label }}
+                        {{ form.player_number }}
+                    </td>>
+                    <td>                
+                        <ul>
+                            {% for error in form.player_number.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </tr>
+                        <tr>
+                        <td colspan="3">
+                                <input type="submit" value="Add player"/>
+                            </td> 
+                    </tr>
+                <tr>
+                    <td>
+                        <a class="btn btn-primary" href="{{ url_for('goals_add', game_id=form.game_id.data) }}">Finish</a>
+                    </td>
+                </tr>
+    </table>
+</form>
+{% endblock %}
