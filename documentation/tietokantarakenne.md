@@ -6,6 +6,8 @@
 
 ## Tietokantakaavio tekstimuodossa
 
+*Huom. päivityksen alla*
+
 [Player|(pk)id:Integer;name:String;number:Integer]
 [Goal|(pk)id:Integer;(fk)game_id:Integer;scorer_id:Integer;assist_id:Integer]
 [Penalty|(pk)id:Integer;(fk)game_id:Integer;player_id:Integer;minutes:Integer]

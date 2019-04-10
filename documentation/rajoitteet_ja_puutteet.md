@@ -1,0 +1,2 @@
+# Sovelluksen rajoitteet ja puutteet
+
