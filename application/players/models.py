@@ -52,6 +52,20 @@ class Player(db.Model):
 
         return response
 
+    @staticmethod
+    def list_games():
+        stmt = text("SELECT Player.number, Player.name, COUNT(gameplayers.player_id) AS games"
+                    " FROM Player"
+                    " INNER JOIN gameplayers ON gameplayers.player_id=Player.id"
+                    " GROUP BY Player.number, Player.name, gameplayers.player_id"
+                    " ORDER BY games DESC;")
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"number":row[0], "name":row[1], "games":row[2]})
+
+        return response
 
 '''
 Kehitelmä varatun numeron tunnistamiseen

@@ -29,4 +29,18 @@
     </tr>
     {% endfor %}
 </table>
+<table>
+        <tr>
+            <th># </th>
+            <th>Player</th>
+            <th>Games</th>        
+        </tr>
+        {% for game in games %}
+        <tr>
+            <td>{{ game.number }}</td>
+            <td>{{ game.name }}</td>
+            <td>{{ game.games }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 {% endblock %}
