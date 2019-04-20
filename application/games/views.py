@@ -67,6 +67,16 @@ def games_edit(id):
         return redirect(url_for("games_index"))
     return render_template("/games/edit.html", form = form, error=error)
 
+# pelin yksityiskohdat
+@app.route("/games/details/<int:id>/", methods=["GET", "POST"])
+@login_required()
+def games_details(id):
+    error = None
+    g = Game.query.filter_by(id=id).first_or_404()
+    s = Stat.game_details(id)
+
+    return render_template("/games/details.html/", game=g, stats=s)
+
 # Pelin poistaminen, vaatii adminin
 @app.route("/games/delete/<int:id>/", methods=["GET", "POST"])
 @login_required(role="ADMIN")

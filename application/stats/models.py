@@ -55,3 +55,17 @@ class Stat(db.Model):
     def delete_stats(game_id):
         stmt = text("DELETE FROM Stat WHERE game_id = :game_id;").params(game_id=game_id)
         res = db.engine.execute(stmt)
+
+# metodi tietyn pelin tilastojen hakemiseen
+    @staticmethod
+    def game_details(id):
+        stmt = text("SELECT Player.number, Player.name, Stat.goals, Stat.assists, Stat.penalties"
+                    " FROM Player INNER JOIN Stat ON Stat.player_id=Player.id"
+                    " WHERE Stat.game_id = :id;").params(id=id)
+        res = db.engine.execute(stmt)
+
+        response = []
+        for row in res:
+            response.append({"number":row[0], "name":row[1], "goals":row[2], "assists":row[3], "penalties":row[4]})
+
+        return response    

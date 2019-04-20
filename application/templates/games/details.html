@@ -1,0 +1,31 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th>Game</th>
+    </tr>
+    <tr>
+        <td>{{ game.date }}</td>
+        <td>{{ game.opponent }}</td>
+        <td>{{ game.botnia_goals }}</td>
+        <td>{{ game.opponent_goals }}</td>
+    </tr>
+    <tr>
+        <th># </th>
+        <th>Player's name</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Penalty minutes</th>
+    </tr>
+    {% for p in stats %}
+    <tr>
+        <td>{{ p.number }}</td>
+        <td>{{ p.name }}</td>    
+        <td>{{ p.goals }}</td>
+        <td>{{ p.assists }}</td>        
+        <td>{{ p.penalties }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

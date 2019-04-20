@@ -24,6 +24,7 @@
         <td>{{ game.botnia_goals }}</td>
         <td>{{ game.opponent_goals }}</td>
         <td>
+            <a class="btn btn-info" href="{{ url_for('games_details', id=game.id) }}">Game Details</a>
             <a class="btn btn-primary" href="{{ url_for('games_edit', id=game.id) }}">Edit game</a>
             <a class="btn btn-danger" href="{{ url_for('games_delete', id=game.id) }}">Delete game</a>
         </td>
