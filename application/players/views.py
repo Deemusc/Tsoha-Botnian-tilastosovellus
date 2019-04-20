@@ -19,7 +19,7 @@ def players_create():
             db.session.commit()
             flash("Player added")            
         except Exception as e:
-            error = e            
+            error = e          
         return redirect(url_for("players_index"))    
     return render_template("/players/new.html", form = form, error = error)
 
