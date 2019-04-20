@@ -2,15 +2,6 @@
 from application import db
 from sqlalchemy.sql import text
 
-'''
-# aputaulu monesta-moneen -yhteyttä varten
-gamestats = db.Table("gamestats",
-            db.metadata,            
-            db.Column("game_id", db.Integer, db.ForeignKey("game.id")),
-            db.Column("stat_id", db.Integer, db.ForeignKey("stat.id")),
-            )
-'''
-
 # ottelua kuvaava luokka
 class Game(db.Model):
     id = db.Column(db.Integer, primary_key=True)
@@ -21,11 +12,6 @@ class Game(db.Model):
 
 # liitetään ottelu tiettyyn käyttäjään, mahdollisesti
     #account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
-
-# monesta-moneen -yhteys
-    #stats = db.relationship('Stat',
-     #           secondary=gamestats, 
-      #          back_populates="games")
 
     def __init__(self, date, opponent, botnia_goals, opponent_goals):
         self.date = date

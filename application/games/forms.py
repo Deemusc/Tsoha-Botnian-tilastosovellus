@@ -1,6 +1,8 @@
+# tarvittavat importit
 from flask_wtf import FlaskForm
 from wtforms import IntegerField, DateField, StringField, validators
 
+# ottelun lomake
 class GameForm(FlaskForm):
     id = IntegerField("ID")
     date = DateField("Date (yyyy-mm-dd)", [validators.DataRequired(message="Insert date as yyyy-mm-dd.")])
@@ -11,6 +13,7 @@ class GameForm(FlaskForm):
     class Meta:
         csrf = False
 
+# lomake tietyn ottelun hakemiseen
 class queryGameForm(FlaskForm):
     opponent = StringField("Opponent's name", [validators.Length(min=1, max=32, message="Enter at least one character (maximum is 32).")])
 

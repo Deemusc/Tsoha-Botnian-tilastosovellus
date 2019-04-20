@@ -5,8 +5,6 @@ from flask_login import login_required, current_user
 from application import app, db, login_required
 from application.games.models import Game
 from application.games.forms import GameForm, queryGameForm
-from application.players.forms import addToGameForm
-from application.players.models import Player
 from application.stats.models import Stat
 
 # Uuden pelin luominen, vaatii adminin
@@ -49,30 +47,7 @@ def games_query():
             error = "No games"
     return render_template("/games/query.html", form=form, error=error)
 
- 
-'''
-# Pelaajien lisääminen tiettyyn peliin.
-@app.route("/games/roster/<game_id>", methods=["GET", "POST"])
-@login_required(role="ADMIN")
-def games_roster(game_id):
-    error = None
-    form = addToGameForm(game_id = game_id)
-    game = Game.query.filter_by(id=game_id).first_or_404()
-    p = Player.query.all()
-    
-    if form.validate_on_submit():
-        try:
-            player = Player.query.filter_by(number=form.player_number.data).first_or_404()                        
-            game.players.append(player)
-            db.session.add(game)
-            db.session.commit()
-            flash("player added")
-        except Exception as e:
-            error = e
-    return render_template("/games/roster.html", form = form, error = error, players = p)
-'''
-
-# Pelin muokkaaminen
+# Pelin muokkaaminen, vaatii adminin
 @app.route("/games/edit/<int:id>/", methods=["GET", "POST"])
 @login_required(role="ADMIN")
 def games_edit(id):
@@ -92,7 +67,7 @@ def games_edit(id):
         return redirect(url_for("games_index"))
     return render_template("/games/edit.html", form = form, error=error)
 
-# Pelin poistaminen
+# Pelin poistaminen, vaatii adminin
 @app.route("/games/delete/<int:id>/", methods=["GET", "POST"])
 @login_required(role="ADMIN")
 def games_delete(id):

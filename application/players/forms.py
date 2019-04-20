@@ -18,6 +18,3 @@ class queryForm(FlaskForm):
     class Meta:
         csrf = False
 
-class addToGameForm(FlaskForm):
-    game_id = IntegerField("game_id")
-    player_number = IntegerField("Player's number", [validators.NumberRange(min=1, max=99)])
