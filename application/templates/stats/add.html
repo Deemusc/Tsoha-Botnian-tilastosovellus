@@ -1,0 +1,73 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{ url_for('stats_add', game_id=form.game_id.data) }}">
+    {{ form.hidden_tag() }}
+<table>
+    <tr>
+            <td>
+                {{ form.player_id.label }}
+            </td>
+            <td>
+                {{ form.player_id }}
+            </td>
+            <td>                
+                <ul>
+                    {% for error in form.player_id.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td> 
+            <td>
+                {{ form.goals.label }}
+            </td>
+            <td>
+                {{ form.goals }}
+            </td>
+            <td>                
+                <ul>
+                    {% for error in form.goals.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                {{ form.assists.label }}
+            </td>
+            <td>
+                {{ form.assists }}
+            </td>
+            <td>                
+                <ul>
+                    {% for error in form.assists.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                {{ form.penalties.label }}
+            </td>
+            <td>
+                {{ form.penalties }}
+            </td>
+            <td>                
+                <ul>
+                    {% for error in form.penalties.errors %}
+                    <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td colspan="3">
+                <input type="submit" value="Add statistics"/>
+            </td> 
+    </tr>    
+    <tr>
+        <td>
+            <a class="btn btn-primary" href="{{ url_for('games_index') }}">Finish</a>
+        </td>
+    </tr>
+
+</table>
+</form>
+
+{% endblock %}

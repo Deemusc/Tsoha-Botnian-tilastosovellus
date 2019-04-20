@@ -28,33 +28,40 @@
                     </td>
                     <td>
                         {{ form.opponent }}
-                    </td>>
-                    <td>                
-                        <td>                
-                    <td>                
+                    </td>
+                    <td>                                                                                       
                         <ul>
                             {% for error in form.opponent.errors %}
                             <li>{{ error }}</li>
                             {% endfor %}
                         </ul>
-                    </td>                                                                                                   
+                    </td>    
+                    <td>
+                        {{ form.botnia_goals.label }}
+                    </td>
+                    <td>
+                        {{ form.botnia_goals }}
+                    </td>
+                    <td>                                                                                                         
+                        <ul>
+                            {% for error in form.botnia_goals.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </ul>
+                    </td>                                                                                                
                     <td>
                         {{ form.opponent_goals.label }}
                     </td>
                     <td>
                         {{ form.opponent_goals }}
-                    </td>>
-                    <td>                
-                        <td>                
-                    <td>                
+                    </td>
+                    <td>                                                                                                         
                         <ul>
                             {% for error in form.opponent_goals.errors %}
                             <li>{{ error }}</li>
                             {% endfor %}
                         </ul>
-                    </td>                                           
-                </td>        
-                    </td>                                                    
+                    </td>                                                                                                                                          
             </tr>
             <tr>
                 <td colspan="3">

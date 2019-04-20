@@ -1,3 +1,4 @@
+# tuodaan tarvittavat osat
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
@@ -5,39 +6,7 @@ from application import app, db, login_required
 from application.players.models import Player
 from application.players.forms import PlayerForm, queryForm
 
-# Pelaajien listaus. Tavallinen käyttäjä voi tarkastella listaa.
-@app.route("/players/", methods=["GET"])
-@login_required()
-def players_index():
-    p = Player.query.all()
-    return render_template("/players/list.html", players=p)
-
-# Maalipörssi. Listataan järjestyksessä kaikki pelaajat, jotka ovat tehneet maaleja.
-@app.route("/players/scorers/", methods=["GET"])
-@login_required()
-def players_scorers():
-    s = Player.list_goal_scorers()
-    a = Player.list_assists()
-    g = Player.list_games()
-    p = Player.list_penalties()
-    return render_template("/players/scorers.html", scorers=s, assists=a, games=g, penalties=p)
-
-# Pelaajien haku-sivu, toimii mukavasti.
-@app.route("/players/query/", methods=["GET", "POST"])
-@login_required()
-def players_query():
-    error = None
-    form = queryForm()
-    if form.validate_on_submit():
-        n = form.name.data + "%"  
-        p = Player.query.filter(Player.name.like(n)).all()        
-        if p:
-            return render_template("/players/query.html", form=form, players=p)
-        else:
-            error = "No players"
-    return render_template("/players/query.html", form=form, error=error)
-
-# Uuden pelaajan luominen, siirtää käyttäjän pelaajien listaukseen.
+# uuden pelaajan luominen, lisää pelaajan tietokantaan, vaatii adminin
 @app.route("/players/new/", methods=["GET", "POST"])
 @login_required(role="ADMIN")
 def players_create():
@@ -52,9 +21,31 @@ def players_create():
         except Exception as e:
             error = e            
         return redirect(url_for("players_index"))    
-    return render_template("/players/new.html", form = form, error = error)   
+    return render_template("/players/new.html", form = form, error = error)
 
-# Pelaajan muokkaaminen, siirtää käyttäjän pelaajien listaukseen.
+# pelaajien listaus, hakee kaikki tiedot taulusta player
+@app.route("/players/", methods=["GET"])
+@login_required()
+def players_index():
+    p = Player.query.all()
+    return render_template("/players/list.html", players=p)
+
+# pelaajien haku, suorittaa kyselyn pelaajan nimen osalla
+@app.route("/players/query/", methods=["GET", "POST"])
+@login_required()
+def players_query():
+    error = None
+    form = queryForm()
+    if form.validate_on_submit():
+        n = form.name.data + "%"  
+        p = Player.query.filter(Player.name.like(n)).all()        
+        if p:
+            return render_template("/players/query.html", form=form, players=p)
+        else:
+            error = "No players"
+    return render_template("/players/query.html", form=form, error=error)    
+
+# pelaajan muokkaaminen, hakee pelaajan id:n perusteella ja päivittää sen tietoja, vaatii adminin
 @app.route("/players/edit/<int:id>/", methods=["GET", "POST"])
 @login_required(role="ADMIN")
 def players_edit(id):
@@ -72,7 +63,7 @@ def players_edit(id):
         return redirect(url_for("players_index"))    
     return render_template("/players/edit.html", form = form, error=error)
 
-# Pelaajan poistaminen.
+# pelaajan poistaminen, hakee pelajaan id:n perusteella ja poistaa tietokannasta, vaatii adminin
 @app.route("/players/delete/<int:id>/", methods=["GET", "POST"])
 @login_required(role="ADMIN")
 def players_delete(id):
@@ -87,3 +78,4 @@ def players_delete(id):
             error = e
         return redirect(url_for("players_index"))    
     return render_template("/players/list.html", error=error)
+    

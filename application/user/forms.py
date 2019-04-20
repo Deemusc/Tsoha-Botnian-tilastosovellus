@@ -4,7 +4,7 @@ from wtforms.validators import Length
 
 class UserForm(FlaskForm):
 
-    name = StringField("Name", validators=[Length(min=2, max=32)])
+    name = StringField("Name", validators=[Length(min=2, max=48)])
     username = StringField("Username", validators=[Length(min=2, max=32)])
     password = PasswordField("Password", validators=[Length(min=2, max=32)])
 

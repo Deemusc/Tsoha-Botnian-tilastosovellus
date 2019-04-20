@@ -1,0 +1,26 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<table>
+    <tr>
+        <th># </th>
+        <th>Player's name</th>
+        <th>Games played</th>
+        <th>Goals</th>
+        <th>Assists</th>
+        <th>Points</th>
+        <th>Penalty minutes</th>
+    </tr>
+    {% for p in points %}
+    <tr>
+        <td>{{ p.number }}</td>
+        <td>{{ p.name }}</td>
+        <td>{{ p.games }}</td>
+        <td>{{ p.goals }}</td>
+        <td>{{ p.assists }}</td>
+        <td>{{ p.points }}</td>
+        <td>{{ p.penalties }}</td>
+    </tr>
+    {% endfor %}
+</table>
+{% endblock %}

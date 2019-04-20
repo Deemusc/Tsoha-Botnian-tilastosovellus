@@ -1,15 +1,31 @@
+# tuodaan tarvittavat osat
 from flask import redirect, render_template, request, url_for
 from flask_login import login_required, current_user
 
 from application import app, db, login_required
 from application.games.models import Game
 from application.games.forms import GameForm, queryGameForm
-from application.goals.models import Goal
-from application.goals.forms import GoalForm
-from application.goals.views import goals_add
 from application.players.forms import addToGameForm
 from application.players.models import Player
+from application.stats.models import Stat
 
+# Uuden pelin luominen, vaatii adminin
+@app.route("/games/new/", methods=["GET", "POST"])
+@login_required(role="ADMIN")
+def games_create():
+    error = None
+    form = GameForm()
+    if form.validate_on_submit():
+        try:
+            g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=form.botnia_goals.data, opponent_goals=form.opponent_goals.data)
+            db.session.add(g)            
+            db.session.commit()
+            flash("game added")
+        except Exception as e:
+            error = e 
+        # siirrytään pelin tilastojen syöttämiseen
+        return redirect(url_for("stats_add", game_id = g.id))
+    return render_template("/games/new.html", form = form, error = error)  
 
 #pelien listaus
 @app.route("/games/", methods=["GET"])
@@ -33,24 +49,8 @@ def games_query():
             error = "No games"
     return render_template("/games/query.html", form=form, error=error)
 
-# Uuden pelin luominen.
-@app.route("/games/new/", methods=["GET", "POST"])
-@login_required(role="ADMIN")
-def games_create():
-    error = None
-    form = GameForm()
-    if form.validate_on_submit():
-        try:
-            g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=0, opponent_goals=form.opponent_goals.data)
-            db.session.add(g)            
-            db.session.commit()
-            flash("game added")
-        except Exception as e:
-            error = e 
-        # Pelin luominen jatkuu maalien yksityiskohtien syöttämisellä.
-        return redirect(url_for("games_roster", game_id = g.id))
-    return render_template("/games/new.html", form = form, error = error)   
-
+ 
+'''
 # Pelaajien lisääminen tiettyyn peliin.
 @app.route("/games/roster/<game_id>", methods=["GET", "POST"])
 @login_required(role="ADMIN")
@@ -70,6 +70,7 @@ def games_roster(game_id):
         except Exception as e:
             error = e
     return render_template("/games/roster.html", form = form, error = error, players = p)
+'''
 
 # Pelin muokkaaminen
 @app.route("/games/edit/<int:id>/", methods=["GET", "POST"])
@@ -82,6 +83,7 @@ def games_edit(id):
         try:
             g.date = form.date.data
             g.opponent = form.opponent.data
+            g.botnia_goals = form.botnia_goals.data
             g.opponent_goals = form.opponent_goals.data
             db.session.commit()
             flash("Game info updated")
@@ -99,6 +101,7 @@ def games_delete(id):
     if g:
         try:
             db.session.delete(g)
+            Stat.delete_stats(g.id)
             db.session.commit()
             flash("Game deleted")
         except Exception as e:
