@@ -6,8 +6,6 @@
 
 ## Tietokantakaavio tekstimuodossa
 
-*Huom. päivityksen alla*
-
 [Player|(pk)id:Integer;number:Integer;name:String]
 
 [Game|(pk)id:Integer;date:Date;opponent:String;botnia_goals:Integer;opponent_goals:Integer]
