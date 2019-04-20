@@ -1,6 +1,6 @@
 # tuodaan tarvittavat osat
 from flask_wtf import FlaskForm
-from wtforms import StringField, IntegerField, RadioField, BooleanField, SelectField, validators
+from wtforms import StringField, IntegerField, SelectField, validators
 
 # lomake tilastojen syöttöä varten
 class StatForm(FlaskForm):

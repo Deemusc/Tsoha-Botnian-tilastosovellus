@@ -16,6 +16,15 @@ def stats_add(game_id):
     form = StatForm(game_id = game_id)
     game = Game.query.filter_by(id=game_id).first_or_404()
     players = Player.query.all()
+    #print(players)
+    #players_ingame = Player.players_in_game(game_id)
+    #print(players_ingame)
+
+    #players_to_add = []
+    #for player in players:
+    #    if player not in players_ingame:
+    #        players_to_add.append(player)
+
     players_list = [(p.id, p.name) for p in players]
     form.player_id.choices = players_list
 

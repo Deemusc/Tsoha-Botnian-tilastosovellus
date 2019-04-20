@@ -3,6 +3,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, IntegerField, HiddenField, ValidationError, validators
 from application.players.models import Player
 
+# tämä luokka luo validaattorin, joka tarkistaa, että pelaajalle syötettyä numeroa ei ole varattu
 class Unique(object):
     def __init__(self, model, field, message=None):
         self.model = model
@@ -30,12 +31,9 @@ class PlayerForm(FlaskForm):
     class Meta:
         csrf = False
 
-
-
 # lomake pelaajan tietojen hakua varten
 class queryForm(FlaskForm):
     name = StringField("Player's name", [validators.Length(min=1)])
 
     class Meta:
         csrf = False
-
