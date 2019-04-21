@@ -20,3 +20,7 @@ joukkueiden tilastoja.
 
 Sovelluksessa ei ole lainkaan mahdollisuutta esimerkiksi plus-miinus -tilastojen keruuseen. Lisäksi kerätyistä tilastoista voisi olla hyödyllistä saada kevyillä tilastollisilla
 menetelmillä tietoja, esimerkiksi pistekeskiarvo.
+
+### Kausien erottelu
+
+Yleensä salibandytilastoja halutaan tarkastella kausittain. Sovelluksen pistepörssi ei tarjoa tällaista vaihtoehtoa.
