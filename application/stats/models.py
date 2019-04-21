@@ -14,16 +14,6 @@ class Stat(db.Model):
     assists = db.Column(db.Integer, nullable=False)
     penalties = db.Column(db.Integer, nullable=False)
 
-# monesta-moneen -yhteys pelaajiin
-    #players = db.relationship('Player',
-     #           secondary=playerstats, 
-      #          back_populates="stats")
-
-# monesta-moneen -yhteys otteluihin
-    #games = db.relationship("Game",
-     #       secondary=gamestats,
-      #      back_populates="stats")
-
     def __init__(self, game_id, player_id, goals, assists, penalties):
         self.game_id = game_id
         self.player_id = player_id
