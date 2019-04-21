@@ -1,35 +1,69 @@
 ## Pelaajien listaaminen
 
-Pelaajat listataan lisäämisjärjestyksessään linkin *List players* takaa. **SQL-kysely**: SELECT * FROM Player;
+Pelaajat listataan lisäämisjärjestyksessään linkin *List players* takaa. 
+
+**SQL-kysely**: SELECT * FROM Player;
 
 ## Pelaajan lisääminen tilastotietokantaan
 
-Uusi pelaaja lisätään tilastoihin *Add a player* -linkistä. Pelaajalle syötetään nimi ja pelinumero. **SQL-kysely**: INSERT INTO Player (number, name) VALUES (?, ?);
+Uusi pelaaja lisätään tilastoihin *Add a player* -linkistä. Pelaajalle syötetään nimi ja pelinumero.
+
+**SQL-kysely**: INSERT INTO Player (number, name) VALUES (?, ?);
 
 ## Pelaajien haku ja muokkaaminen tai poistaminen
 
-Pelaajia voidaan hakea nimen perusteella linkin *Search players* takaa. Haku löytää pelaajat nimen alun perusteella, yksikin kirjain riittää, eikä kirjainkoolla ole merkitystä. **SQL-kysely**: SELECT * FROM Player WHERE name LIKE '?%';
+Pelaajia voidaan hakea nimen perusteella linkin *Search players* takaa. Haku löytää pelaajat nimen alun perusteella, yksikin kirjain riittää, eikä kirjainkoolla ole merkitystä.
 
-Pelaajaa voidaan muokata joko hakemalla tietty pelaaja hakutoiminnon kautta tai listaamalla kaikki pelaajat. Molemmissa tapauksissa pelaajan vieressä on nappi *Edit player*, josta pääsee syöttämään pelaajalle uudet tiedot. **SQL-kysely**: UPDATE Player SET number=?, name=? WHERE id=?;
+**SQL-kysely**: SELECT * FROM Player WHERE name LIKE '?%';
 
-Pelaajan poistaminen aloitetaan samoin kuin muokkaaminen, hakutoiminnon tai listaamisen kautta. Pelaajan vieressä on nappi *Delete player*, josta pelaajan voi poistaa. **SQL-kysely**: DELETE FROM Player WHERE id=?;
+Pelaajaa voidaan muokata joko hakemalla tietty pelaaja hakutoiminnon kautta tai listaamalla kaikki pelaajat. Molemmissa tapauksissa pelaajan vieressä on nappi *Edit player*, josta pääsee syöttämään pelaajalle uudet tiedot.
+
+**SQL-kysely**: UPDATE Player SET number=?, name=? WHERE id=?;
+
+Pelaajan poistaminen aloitetaan samoin kuin muokkaaminen, hakutoiminnon tai listaamisen kautta. Pelaajan vieressä on nappi *Delete player*, josta pelaajan voi poistaa.
+
+**SQL-kysely**: DELETE FROM Player WHERE id=?;
 
 ## Otteluiden listaaminen
 
-Ottelut voidaan listata lisäämisjärjestyksessään linkin *List games* takaa. **SQL-kysely**: SELECT * FROM Game; 
+Ottelut voidaan listata lisäämisjärjestyksessään linkin *List games* takaa.
+
+**SQL-kysely**: SELECT * FROM Game; 
 
 ## Ottelun lisääminen tietokantaan
 
-Uusi ottelu lisätään tilastoihin *Add a game* -linkistä. Ottelulle annetaan päivämäärä, vastustajajoukkueen nimi sekä joukkueiden tekemien maalien määrät. Seuraavaksi siirrytään sivulle, jossa syötetään Botnian pelaajien tilastot ottelussa. **SQL-kyselyt**: INSERT INTO Game (date, opponent, botnia_goals, opponent_goals) VALUES (?, ?, ?, ?); - INSERT INTO Stat (game_id, player_id, goals, assists, penalties) VALUES (?, ?, ?, ?);
+Uusi ottelu lisätään tilastoihin *Add a game* -linkistä. Ottelulle annetaan päivämäärä, vastustajajoukkueen nimi sekä joukkueiden tekemien maalien määrät.
+
+**SQL-kysely**: INSERT INTO Game (date, opponent, botnia_goals, opponent_goals) VALUES (?, ?, ?, ?);
+
+Seuraavaksi siirrytään sivulle, jossa syötetään Botnian pelaajien tilastot ottelussa. 
+
+**SQL-kysely**: INSERT INTO Stat (game_id, player_id, goals, assists, penalties) VALUES (?, ?, ?, ?);
+
 
 ## Otteluiden haku ja muokkaaminen tai poistaminen
 
-Otteluita voidaan hakea vastustajan nimen perusteella linkin *Search games* takaa. Haku löytää ottelut haettua vastustajaa vastaan, hakea voi myös joukkueen nimen alun perusteella. **SQL-kysely**: SELECT * FROM WHERE opponent LIKE '?%';
+Otteluita voidaan hakea vastustajan nimen perusteella linkin *Search games* takaa. Haku löytää ottelut haettua vastustajaa vastaan, hakea voi myös joukkueen nimen alun perusteella.
 
-Kuten pelaajien muokkaaminen ja poistaminen, otteluidenkin muokkaaminen ja poistaminen aloitetaan hakemalla ottelu tai listaamalla ne kaikki. Ottelun vieressä on nappi *Edit game*, josta pääsee syöttämään ottelulle uudet tiedot. **SQL-kysely**: UPDATE Game SET date=?, opponent=?, botnia_goals=?, opponent_goals=? WHERE id=?;
+**SQL-kysely**: SELECT * FROM WHERE opponent LIKE '?%';
 
-Napista *Delete game* ottelu poistetaan. **SQL-kysely**: DELETE FROM Game WHERE id=?;
+Kuten pelaajien muokkaaminen ja poistaminen, otteluidenkin muokkaaminen ja poistaminen aloitetaan hakemalla ottelu tai listaamalla ne kaikki. Ottelun vieressä on nappi *Edit game*, josta pääsee syöttämään ottelulle uudet tiedot.
+
+**SQL-kysely**: UPDATE Game SET date=?, opponent=?, botnia_goals=?, opponent_goals=? WHERE id=?;
+
+Napista *Delete game* ottelu poistetaan.
+
+**SQL-kysely**: DELETE FROM Game WHERE id=?;
+
+Samalla tulee luonnollisesti poistaa tilastomerkinnät ottelusta.
+
+**SQL-kysely**: DELETE FROM Stat WHERE game_id = ?;
 
 ## Pistepörssin tarkastelu
 
-Linkistä *Statistics* päästään tarkastelemaan Botnian pistepörssiä, eli pelaajien pelattuja otteluita, maaleja, syöttöjä, pisteitä ja jäähyminuutteja. **SQL-kysely**: SELECT Player.number, Player.name, COUNT(Stat.player_id) AS games, SUM(Stat.goals) AS goals, SUM(Stat.assists) AS assists, SUM(goals + assists) AS points, SUM(Stat.penalties) AS penalties FROM Player LEFT JOIN Stat ON Stat.player_id=Player.id GROUP BY Player.id ORDER BY points DESC, goals DESC, penalties;
+Linkistä *Statistics* päästään tarkastelemaan Botnian pistepörssiä, eli pelaajien pelattuja otteluita, maaleja, syöttöjä, pisteitä ja jäähyminuutteja.
+
+**SQL-kysely**: SELECT Player.number, Player.name, COUNT(Stat.player_id) AS games, SUM(Stat.goals) AS goals,
+ SUM(Stat.assists) AS assists, SUM(goals + assists) AS points, SUM(Stat.penalties) AS penalties
+ FROM Player LEFT JOIN Stat ON Stat.player_id=Player.id GROUP BY Player.id
+ ORDER BY points DESC, goals DESC, penalties;
