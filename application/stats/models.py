@@ -4,10 +4,11 @@ from sqlalchemy.sql import text
 
 # tilastotaulua kuvaava luokka
 class Stat(db.Model):
+    # varmistetaan, ettei tietokantaan mene samalle pelaajalle yhteen otteluun useampia tilastoja
     __table_args__ = (
         db.UniqueConstraint("game_id", "player_id", name="unique_game_player"),
     )
-    id = db.Column(db.Integer, primary_key=True, auto_increment=True)
+    id = db.Column(db.Integer, primary_key=True)
     game_id = db.Column(db.Integer, db.ForeignKey("game.id"), nullable=False)
     player_id = db.Column(db.Integer, db.ForeignKey("player.id"), nullable=False)    
     goals = db.Column(db.Integer, nullable=False)
@@ -58,4 +59,4 @@ class Stat(db.Model):
         for row in res:
             response.append({"number":row[0], "name":row[1], "goals":row[2], "assists":row[3], "penalties":row[4]})
 
-        return response    
+        return response

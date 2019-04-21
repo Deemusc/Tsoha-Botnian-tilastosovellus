@@ -10,9 +10,6 @@ class Game(db.Model):
     botnia_goals = db.Column(db.Integer, nullable=False)
     opponent_goals = db.Column(db.Integer, nullable=False)
 
-# liitetään ottelu tiettyyn käyttäjään, mahdollisesti
-    #account_id = db.Column(db.Integer, db.ForeignKey('account.id'), nullable=False)
-
     def __init__(self, date, opponent, botnia_goals, opponent_goals):
         self.date = date
         self.opponent = opponent

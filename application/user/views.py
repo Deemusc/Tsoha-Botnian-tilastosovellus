@@ -6,7 +6,7 @@ from application import app, db
 from application.auth.models import User
 from application.user.forms import UserForm
 
-# uuden peruskäyttäjän (roolina 'regular') luominen
+# uuden peruskäyttäjän (roolina 'admin') luominen
 @app.route("/user/new", methods=["GET", "POST"])
 def user_signup():
     form = UserForm()
