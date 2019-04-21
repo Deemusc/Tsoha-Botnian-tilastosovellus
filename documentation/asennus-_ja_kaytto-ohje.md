@@ -14,13 +14,13 @@ Sovellukseen kirjaudutaan sisään oikean reunan *Log in* -painikkeesta. Viereis
 
 ### Pelaajaan liittyvät toiminnallisuudet
 
-Sovellukseen kannattaa lisätä pelaajia ennen muita toimintoja. Pelaajan lisääminen onnistuu painikkeesta *Add player*. Pelaajalle syötetään pelinumero, joka **toivottavasti tulee olemaan** uniikki sekä nimi. Painikkeesta *List players* pääsee tarkastelemaan pelaajia. Pelaajia voi muokata listausnäkymässä pelaajan viereen tulevasta painikkeesta *Edit*. Muokkaustila toimii pelaajan lisäämistilan tavoin. Pelaajan voi myös poistaa samasta näkymästä *Delete*-painikkeesta.
+Sovellukseen kannattaa lisätä pelaajia ennen muita toimintoja. Pelaajan lisääminen onnistuu painikkeesta *Add player*. Pelaajalle syötetään pelinumero, joka ei saa olla jo käytössä, ja nimi. Painikkeesta *List players* pääsee tarkastelemaan pelaajia. Pelaajia voi muokata listausnäkymässä pelaajan viereen tulevasta painikkeesta *Edit*. Muokkaustila toimii pelaajan lisäämistilan tavoin. Pelaajan voi myös poistaa samasta näkymästä *Delete*-painikkeesta.
 
 Pelaajia voi myös hakea nimen perusteella *Search players* -painikkeesta. Haku löytää kaikki pelaajat, joiden nimen alussa on haettu kirjainyhdistelmä.
 
 ### Otteluihin liittyvät toiminnallisuudet
 
-Uusi ottelu lisätään *Add game* -painikkeesta. Ottelulle syötetään ensin päivämäärä, vastustajajoukkueen nimi, Botnian tekemien maalien määrä sekä vastustajajoukkueen tekemien maalien määrä. Siirryttäessä eteenpäin *Add game* -painikkeella, päästään syöttämään Botnian pelaajien tilastot kyseisessä ottelussa. Pudotusvalikosta valitaan pelaaja ja hänelle syötetään ottelussa tehtyjen maalien ja syöttöjen määrät sekä jäähyminuuttien määrä. *Add statistics* -napista lisätään pelaajan tiedot järjestelmään. Pelaajan tiedot voidaan syöttää vain kerran yhteen otteluun, **mutta tämän validointi ei vielä toimi**.
+Uusi ottelu lisätään *Add game* -painikkeesta. Ottelulle syötetään ensin päivämäärä, vastustajajoukkueen nimi, Botnian tekemien maalien määrä sekä vastustajajoukkueen tekemien maalien määrä. Siirryttäessä eteenpäin *Add game* -painikkeella, päästään syöttämään Botnian pelaajien tilastot kyseisessä ottelussa. Pudotusvalikosta valitaan pelaaja ja hänelle syötetään ottelussa tehtyjen maalien ja syöttöjen määrät sekä jäähyminuuttien määrä. *Add statistics* -napista lisätään pelaajan tiedot järjestelmään. Pelaajan tiedot voidaan syöttää vain kerran yhteen otteluun.
 
 Ottelut voidaan listata *List games* -painikkeesta. Otteluita voidaan myös hakea vastaavasti kuin pelaajia, hakukriteerinä annetaan vastustajajoukkueen nimi tai kirjaimia alusta. Otteluita voidaan muokata listauksessa ottelun vierestä löytyvällä *Edit*-painikkeella. Ottelun perustietoja voidaan muokata **ja myöhemmin tarkoitus olisi pystyä muokkaamaan myös pelaajien tilastoja ko. ottelussa**. Ottelu voidaan myös poistaa *Delete*-painikkeella.
 
