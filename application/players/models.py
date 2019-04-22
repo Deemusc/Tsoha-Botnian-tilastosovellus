@@ -34,7 +34,7 @@ class Player(db.Model):
     def list_all(teamname):
         stmt = text("SELECT Player.id, Player.number, Player.name"
                     " FROM PLAYER" 
-                    " WHERE Player.teamname = :teamname;").params(teamname=teamname)
+                    " WHERE Player.teamname <> :teamname;").params(teamname=teamname)
         res = db.engine.execute(stmt)
 
         response = []
