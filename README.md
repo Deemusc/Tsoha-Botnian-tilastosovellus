@@ -1,9 +1,9 @@
 # Tsoha-Botnian-tilastosovellus
-Tilastosovellus salibandyjoukkue SBS Botnian käyttöön. Aineopintojen harjoitustyö: tietokantasovellus.
+Tilastosovellus salibandyjoukkueiden käyttöön. Aineopintojen harjoitustyö: tietokantasovellus. Sovelluksen oli tarkoitus alunperin palvella vain kehittäjän omaa joukkuetta SBS Botniaa, mutta se yleistettiin minkä tahansa joukkueen käyttöön.
 
 **Pistepörssisovellus salibandyjoukkueen käyttöön**
 
-Harjoitustyönä laaditaan tilastosovellus, johon merkitään joukkueen SBS Botnia otteluiden tuloksia ja pelaajien tekemiä pisteitä sekä ottamia jäähyjä. Sivustolle kirjaudutaan joko pääkäyttäjän tunnuksilla tai peruskäyttäjän tunnuksilla. Pääkäyttäjä voi lisätä tilastomerkintöjä tai muokata ja poistaa niitä. Molemmat käyttäjät voivat tarkastella tilastoja.
+Harjoitustyönä laaditaan tilastosovellus, johon merkitään salibandyjoukkueen otteluiden tuloksia ja pelaajien tekemiä pisteitä sekä ottamia jäähyjä. Sivustolle kirjaudutaan joko pääkäyttäjän tunnuksilla tai peruskäyttäjän tunnuksilla. Pääkäyttäjä voi lisätä tilastomerkintöjä tai muokata ja poistaa niitä. Lisäksi pääkäyttäjä voi luoda uusia peruskäyttäjiä joukkueelle. Molemmat käyttäjät voivat tarkastella tilastoja.
 
 Sovellus pitää otteluista kirjaa. Yksittäisestä ottelusta tiedetään päivämäärä, joukkueet ja lopputulos. Ottelusta tiedetään myös siinä pelanneiden Botnian pelaajien tilastomerkinnät (maalit, syötöt ja jäähyt). Pelaajasta tiedetään nimi ja pelinumero. Tiedoista saadaan koostettua pistepörssi, josta voidaan tarkastella pelaajia, heidän pelaamiaan otteluita sekä niissä tehtyjä pisteitä ja kertyneitä jäähyminuutteja.
 
