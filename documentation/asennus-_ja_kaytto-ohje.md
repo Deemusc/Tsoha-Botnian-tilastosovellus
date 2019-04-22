@@ -12,7 +12,8 @@ pelaajia ja otteluita, hakea niitä sekä tarkastella tilastoja. Admin-käyttäj
 ### Kirjautuminen ja uuden tunnuksen luominen
 
 Sovellukseen kirjaudutaan sisään oikean reunan *Log in* -painikkeesta. Viereisestä *Sign up* -painikkeesta voi luoda uuden admin-käyttäjän uudelle joukkueelle. Samassa 
-kohdassa lukee sisäänkirjautuneen käyttäjän nimi ja on mahdollisuus kirjautua ulos.
+kohdassa lukee sisäänkirjautuneen käyttäjän nimi ja on mahdollisuus kirjautua ulos. Sisäänkirjautuneena oikealla on myös linkki *Create new regular user*, josta admin-
+käyttäjä voi luoda joukkueelle peruskäyttäjän.
 
 ### Pelaajaan liittyvät toiminnallisuudet
 
