@@ -7,6 +7,9 @@ from sqlalchemy.sql import text
 class User(Base):
 
     __tablename__ = "account"
+    __table_args__ = (
+        db.UniqueConstraint("id", "teamname", name="unique_id_teamname"),
+    )
 
     teamname = db.Column(db.String(32), nullable=False)
     username = db.Column(db.String(32), nullable=False)
