@@ -7,17 +7,14 @@ from sqlalchemy.sql import text
 class User(Base):
 
     __tablename__ = "account"
-    __table_args__ = (
-        db.UniqueConstraint("id", "teamname", name="unique_id_teamname"),
-    )
 
     teamname = db.Column(db.String(32), nullable=False)
     username = db.Column(db.String(32), nullable=False)
     password = db.Column(db.String(32), nullable=False)
     role = db.Column(db.String(10), nullable=False)
 
-    games = db.relationship("Game", backref='account', lazy=True)
-    players = db.relationship("Player", backref='account', lazy=True)
+    #games = db.relationship("Game", backref='account', lazy=True)
+    #players = db.relationship("Player", backref='account', lazy=True)
 
     def __init__(self, teamname, username, password, role):
         self.teamname = teamname

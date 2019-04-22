@@ -8,7 +8,7 @@ class Player(db.Model):
     number = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(48), nullable=False)
 
-    teamname = db.Column(db.String(32), db.ForeignKey('account.teamname'), nullable=False)
+    teamname = db.Column(db.String(32), nullable=False)
     
     def __init__(self, name, number):
         self.name = name
