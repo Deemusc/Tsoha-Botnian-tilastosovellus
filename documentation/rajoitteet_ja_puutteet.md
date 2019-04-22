@@ -7,19 +7,14 @@ haussa haku toimii vain vastustajan nimellä (tai alkukirjaimilla), vaikka muita
 
 ### Ottelun yksityiskohtien rajoitteet
 
-Tietystä ottelusta tiedetään Botnian pelaajien siinä tekemät maalit ja syötöt sekä ottamat jäähyminuutit, mutta ottelun tilastomerkintöjä ei saada yksittäisten tapahtumien
-tarkkuudella. Ei siis ole mahdollista tietää, kuka pelaaja syötti kenenkin maalin tai minkälaisista rangaistuksista pelaajan kokonaisjäähyminuutit koostuvat. Sovellus jättää
-myös tilastoimatta maalien syntyjärjestyksen.
-
-### Sovelluksen yleistettävyys
-
-Sovelus tilastoi vain yhden joukkueen tilastoja. Käyttäjiä ei ole liitetty tietokannan tietoihin, joka olisi edellytys sille, että sovellus voisi tilastoida useiden eri
-joukkueiden tilastoja.
+Tietystä ottelusta tiedetään oman joukkueen pelaajien siinä tekemät maalit ja syötöt sekä ottamat jäähyminuutit, mutta ottelun tilastomerkintöjä ei saada yksittäisten 
+tapahtumien tarkkuudella. Ei siis ole mahdollista tietää, kuka pelaaja syötti kenenkin maalin tai minkälaisista rangaistuksista pelaajan kokonaisjäähyminuutit koostuvat. 
+Sovellus jättää myös tilastoimatta maalien syntyjärjestyksen.
 
 ### Useampia tilastoja
 
-Sovelluksessa ei ole lainkaan mahdollisuutta esimerkiksi plus-miinus -tilastojen keruuseen. Lisäksi kerätyistä tilastoista voisi olla hyödyllistä saada kevyillä tilastollisilla
-menetelmillä tietoja, esimerkiksi pistekeskiarvo.
+Sovelluksessa ei ole lainkaan mahdollisuutta esimerkiksi plus-miinus -tilastojen keruuseen. Lisäksi kerätyistä tilastoista voisi olla hyödyllistä saada kevyillä 
+tilastollisilla menetelmillä tietoja, esimerkiksi pistekeskiarvo.
 
 ### Kausien erottelu
 
