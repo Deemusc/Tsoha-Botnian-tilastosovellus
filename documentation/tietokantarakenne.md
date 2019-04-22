@@ -25,7 +25,7 @@ nimestä, joten samalle joukkueelle voidaan luoda useampi käyttäjä.
 
 [Player|(pk)id:Integer;number:Integer;name:String;(fk)teamname:String]
 
-[Game|(pk)id:Integer;date:Date;opponent:String;botnia_goals:Integer;opponent_goals:Integer;(fk)teamname:String]
+[Game|(pk)id:Integer;date:Date;opponent:String;our_goals:Integer;opponent_goals:Integer;(fk)teamname:String]
 
 [Stat|(pk)id:Integer;(fk)game_id:Integer;(fk)player_id:Integer;goals:Integer;assists:Integer;penalties:Integer]
 
