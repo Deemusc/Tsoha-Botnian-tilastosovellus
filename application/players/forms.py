@@ -13,7 +13,7 @@ class Unique(object):
         self.message = message
 
     def __call__(self, form, field):
-        check = self.model.query.filter(self.field == field.data).first()
+        check = self.model.query.filter(self.field == field.data, Player.teamname == form.teamname.data).first()
         if 'id' in form:
             id = form.id.data
         else:
@@ -25,6 +25,7 @@ class Unique(object):
 # lomake pelaajan tietojen keruuta varten
 class PlayerForm(FlaskForm):
     id = IntegerField("ID")
+    teamname = StringField("teamname")
     number = IntegerField("Player's number", [validators.NumberRange(min=1, max=99), Unique(Player, Player.number)])
     name = StringField("Player's name", [validators.Length(min=3, max=48)])
 

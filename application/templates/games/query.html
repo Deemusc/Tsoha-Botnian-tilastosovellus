@@ -5,7 +5,7 @@
     <tr>
         <th>Date </th>
         <th>Opponent</th>
-        <th>Botnia's goals</th>
+        <th>Our goals</th>
         <th>Opponent's goals</th>
     </tr>
     {% if form %}
@@ -21,7 +21,7 @@
         {% for game in games %}
         <td>{{ game.date }}</td>
         <td>{{ game.opponent }}</td>
-        <td>{{ game.botnia_goals }}</td>
+        <td>{{ game.our_goals }}</td>
         <td>{{ game.opponent_goals }}</td>
         <td>
             <a class="btn btn-info" href="{{ url_for('games_details', id=game.id) }}">Game Details</a>

@@ -15,7 +15,8 @@ def games_create():
     form = GameForm()
     if form.validate_on_submit():
         try:
-            g = Game(date=form.date.data, opponent=form.opponent.data, botnia_goals=form.botnia_goals.data, opponent_goals=form.opponent_goals.data)
+            g = Game(date=form.date.data, opponent=form.opponent.data, our_goals=form.our_goals.data, opponent_goals=form.opponent_goals.data)
+            g.teamname = current_user.teamname
             db.session.add(g)            
             db.session.commit()
             flash("game added")
@@ -29,7 +30,7 @@ def games_create():
 @app.route("/games/", methods=["GET"])
 @login_required()
 def games_index():
-    g = Game.query.all()
+    g = Game.query.filter(Game.teamname == current_user.teamname).all()
     return render_template("/games/list.html", games=g)
 
 # pelien hakutoiminto, atm vain vastustajan nimellä
@@ -40,7 +41,7 @@ def games_query():
     form = queryGameForm()
     if form.validate_on_submit():
         n = form.opponent.data + "%" 
-        g = Game.query.filter(Game.opponent.like(n)).all()
+        g = Game.query.filter(Game.teamname == current_user.teamname, Game.opponent.like(n)).all()
         if g:
             return render_template("/games/query.html", form=form, games=g)
         else:
@@ -58,7 +59,7 @@ def games_edit(id):
         try:
             g.date = form.date.data
             g.opponent = form.opponent.data
-            g.botnia_goals = form.botnia_goals.data
+            g.our_goals = form.our_goals.data
             g.opponent_goals = form.opponent_goals.data
             db.session.commit()
             flash("Game info updated")

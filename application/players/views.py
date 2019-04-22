@@ -11,10 +11,11 @@ from application.players.forms import PlayerForm, queryForm
 @login_required(role="ADMIN")
 def players_create():
     error = None
-    form = PlayerForm()
+    form = PlayerForm(teamname=current_user.teamname)
     if form.validate_on_submit():
         try:
             p = Player(number=form.number.data, name=form.name.data)
+            p.teamname = current_user.teamname
             db.session.add(p)
             db.session.commit()
             flash("Player added")            
@@ -27,7 +28,7 @@ def players_create():
 @app.route("/players/", methods=["GET"])
 @login_required()
 def players_index():
-    p = Player.query.all()
+    p = Player.query.filter(Player.teamname == current_user.teamname).all()
     return render_template("/players/list.html", players=p)
 
 # pelaajien haku, suorittaa kyselyn pelaajan nimen osalla
@@ -38,7 +39,7 @@ def players_query():
     form = queryForm()
     if form.validate_on_submit():
         n = form.name.data + "%"  
-        p = Player.query.filter(Player.name.like(n)).all()        
+        p = Player.query.filter(Player.teamname == current_user.teamname, Player.name.like(n)).all()        
         if p:
             return render_template("/players/query.html", form=form, players=p)
         else:
