@@ -19,7 +19,7 @@ nimestä, joten samalle joukkueelle voidaan luoda useampi käyttäjä.
 
 ## Tietokantakaavio
 
-![](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_kuvana.png)
+![](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_kuva.png)
 
 ## Tietokantakaavio tekstimuodossa
 
