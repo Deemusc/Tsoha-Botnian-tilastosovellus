@@ -29,7 +29,7 @@ nimestä, joten samalle joukkueelle voidaan luoda useampi käyttäjä.
 
 [Stat|(pk)id:Integer;(fk)game_id:Integer;(fk)player_id:Integer;goals:Integer;assists:Integer;penalties:Integer]
 
-[Account|(pk)id:Integer;name:String;username:String;password:String;teamname:String]
+[Account|(pk)id:Integer;username:String;password:String;teamname:String]
 
 [Stat]*-1[Player]
 
