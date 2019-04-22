@@ -38,3 +38,57 @@ nimestä, joten samalle joukkueelle voidaan luoda useampi käyttäjä.
 [Game]*-1[Account]
 
 [Player]*-[Account]
+
+## Create table -lauseet
+
+**Account-taulun luonti**
+
+CREATE TABLE account (
+	id INTEGER NOT NULL, 
+	date_created DATETIME, 
+	date_modified DATETIME, 
+	teamname VARCHAR(32) NOT NULL, 
+	username VARCHAR(32) NOT NULL, 
+	password VARCHAR(32) NOT NULL, 
+	role VARCHAR(10) NOT NULL, 
+	PRIMARY KEY (id)
+);
+
+**Pelaaja-taulun luonti**
+
+CREATE TABLE player (
+	id INTEGER NOT NULL, 
+	number INTEGER NOT NULL, 
+	name VARCHAR(48) NOT NULL, 
+	teamname VARCHAR(32) NOT NULL, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(teamname) REFERENCES account (teamname)
+);
+
+**Ottelu-taulun luonti**
+
+CREATE TABLE game (
+	id INTEGER NOT NULL, 
+	date DATE NOT NULL, 
+	opponent VARCHAR(32) NOT NULL, 
+	our_goals INTEGER NOT NULL, 
+	opponent_goals INTEGER NOT NULL, 
+	teamname VARCHAR(32) NOT NULL, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(teamname) REFERENCES account (teamname)
+);
+
+**Tilasto-taulun luonti**
+
+CREATE TABLE stat (
+	id INTEGER NOT NULL, 
+	game_id INTEGER NOT NULL, 
+	player_id INTEGER NOT NULL, 
+	goals INTEGER NOT NULL, 
+	assists INTEGER NOT NULL, 
+	penalties INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	CONSTRAINT unique_game_player UNIQUE (game_id, player_id), 
+	FOREIGN KEY(game_id) REFERENCES game (id), 
+	FOREIGN KEY(player_id) REFERENCES player (id)
+);
