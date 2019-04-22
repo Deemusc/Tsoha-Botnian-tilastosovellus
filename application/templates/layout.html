@@ -39,7 +39,8 @@
                         </li>
                       </ul>
                       <div class="form-inline my-2 my-lg-0">
-                            {% if current_user.is_authenticated %}                            
+                            {% if current_user.is_authenticated %}
+                                <a href="{{ url_for('regular_user_signup') }}">Create new regular user  -  </a>                        
                                 <a href="{{ url_for('auth_logout') }}">Signed in as {{ current_user.name }} -- Logout</a>                            
                             {% else %}
                             <div class="container">

@@ -8,13 +8,13 @@ class User(Base):
 
     __tablename__ = "account"
 
-    name = db.Column(db.String(48), nullable=False)
+    teamname = db.Column(db.String(48), nullable=False)
     username = db.Column(db.String(32), nullable=False)
     password = db.Column(db.String(32), nullable=False)
     role = db.Column(db.String(10), nullable=False)
 
-    def __init__(self, name, username, password, role):
-        self.name = name
+    def __init__(self, teamname, username, password, role):
+        self.teamname = teamname
         self.username = username
         self.password = password
         self.role = role
