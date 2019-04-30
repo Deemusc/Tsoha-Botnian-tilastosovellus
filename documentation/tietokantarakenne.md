@@ -14,30 +14,34 @@ uniikki. Käyttäjän tulee olla yhteydessä pelaajaan ja otteluun, jotta käytt
 
 Pelaajan attribuutteina tulee olla id:n lisäksi pelaajan numero ja nimi. Ottelulle halutaan tallettaa id:n lisäksi päivämäärä, vastustajajoukkueen nimi ja molempien 
 joukkueiden tekemien maalien määrä. Kuvataan tilastomerkintöjä taululla *Stat*, johon yhdistetään pelaajan ja ottelun id, sekä näihin liittyen maalien, syöttöjen ja 
-jäähyminuuttien määrä. Käyttäjälle annetaan attribuuteiksi joukkueen nimi, käyttäjänimi ja salasana. Pelaajalle ja ottelulle annetaan tieto niihin liittyvästä joukkueen
-nimestä, joten samalle joukkueelle voidaan luoda useampi käyttäjä.
+jäähyminuuttien määrä. Käyttäjälle annetaan attribuuteiksi joukkueen nimi, käyttäjänimi ja salasana. Jotta samalle joukkueelle voidaan luoda useampi (eritasoinen)
+käyttäjä, luodaan myös tietokantataulu joukkue, joka liitetään käyttäjään ja otteluihin ja pelaajiin.
 
 ## Tietokantakaavio
 
-![](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_kuvana.png)
+![](https://github.com/Deemusc/Tsoha-Botnian-tilastosovellus/blob/master/documentation/tietokantakaavio_kuva.png)
 
 ## Tietokantakaavio tekstimuodossa
 
-[Player|(pk)id:Integer;number:Integer;name:String;(fk)teamname:String]
+[Player|(pk)id:Integer;number:Integer;name:String;(fk)team_id:Integer]
 
-[Game|(pk)id:Integer;date:Date;opponent:String;our_goals:Integer;opponent_goals:Integer;(fk)teamname:String]
+[Game|(pk)id:Integer;date:Date;opponent:String;our_goals:Integer;opponent_goals:Integer;(fk)team_id:Integer]
 
 [Stat|(pk)id:Integer;(fk)game_id:Integer;(fk)player_id:Integer;goals:Integer;assists:Integer;penalties:Integer]
 
-[Account|(pk)id:Integer;username:String;password:String;teamname:String]
+[Team|(pk)id:Integer;name:String]
+
+[Account|(pk)id:Integer;username:String;password:String;(fk)team_id:Integer]
 
 [Stat]*-1[Player]
 
 [Stat]*-1[Game]
 
-[Game]*-1[Account]
+[Game]*-1[Team]
 
-[Player]*-[Account]
+[Player]*-1[Team]
+
+[Team]1-*[Account]
 
 ## Create table -lauseet
 
