@@ -24,16 +24,16 @@ class Stat(db.Model):
         
 # metodi tilastojen hakemiseen
     @staticmethod
-    def list_points(teamname):
+    def list_points(team_id):
         stmt = text("SELECT Player.number, Player.name, COUNT(Stat.player_id) AS games,"
                     " SUM(Stat.goals) AS goals,"
                     " SUM(Stat.assists) AS assists, SUM(goals + assists) AS points,"
                     " SUM(Stat.penalties) AS penalties"
                     " FROM Player"
                     " LEFT JOIN Stat ON Stat.player_id=Player.id"
-                    " WHERE Player.teamname = :teamname"
+                    " WHERE Player.team_id = :team_id"
                     " GROUP BY Player.id"
-                    " ORDER BY points DESC, goals DESC, penalties;").params(teamname=teamname)
+                    " ORDER BY points DESC, goals DESC, penalties;").params(team_id=team_id)
         res = db.engine.execute(stmt)
 
         response = []

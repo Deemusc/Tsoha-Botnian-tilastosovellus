@@ -10,7 +10,7 @@ class Game(db.Model):
     our_goals = db.Column(db.Integer, nullable=False)
     opponent_goals = db.Column(db.Integer, nullable=False)
 
-    teamname = db.Column(db.String(32), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
 
     def __init__(self, date, opponent, our_goals, opponent_goals):
         self.date = date

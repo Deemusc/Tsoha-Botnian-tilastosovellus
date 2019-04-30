@@ -1,0 +1,41 @@
+{% extends "layout.html" %}
+
+{% block body %}
+<form method="POST" action="{{url_for('team_signup') }}">
+    <h3>Create a new team for user</h3>
+    <table>
+        <div class=container>
+            <tr>
+                <div class="row">
+                    <td>
+                        <div class="col-sm">                        
+                            {{ form.name.label }}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-sm">                        
+                            {{ form.name }}
+                        </div>
+                    </td>
+                    <td>
+                        <div class="col-sm">
+                            {% for error in form.name.errors %}
+                            <li>{{ error }}</li>
+                            {% endfor %}
+                        </div>
+                    </td>
+                </div>    
+            </tr>                      
+            <tr>
+            <div class="row">
+                <td colspan="2">
+                    <div class="col-sm">
+                    <Button type="submit" class="btn btn-primary">Create team</Button>
+                    </div>
+                </td>
+            </div>
+            </tr>
+        </div>
+    </table>    
+</form>
+{% endblock %}

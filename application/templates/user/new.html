@@ -1,31 +1,10 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{url_for('user_signup') }}">
+<form method="POST" action="{{url_for('user_signup', team_id=form.team_id.data) }}">
     <h3>Create a new user</h3>
     <table>
-        <div class=container>
-            <tr>
-                <div class="row">
-                    <td>
-                        <div class="col-sm">                        
-                            {{ form.teamname.label }}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-sm">                        
-                            {{ form.teamname }}
-                        </div>
-                    </td>
-                    <td>
-                        <div class="col-sm">
-                            {% for error in form.teamname.errors %}
-                            <li>{{ error }}</li>
-                            {% endfor %}
-                    </div>
-                    </td>
-                </div>    
-            </tr>            
+        <div class=container>           
             <tr>
                 <div class="row">
                     <td>

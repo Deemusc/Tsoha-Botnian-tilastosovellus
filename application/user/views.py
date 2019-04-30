@@ -4,16 +4,17 @@ from flask_login import login_user, logout_user, current_user, login_required
 
 from application import app, db, login_required
 from application.auth.models import User
+from application.teams.models import Team
 from application.user.forms import UserForm, RegularUserForm
 
 # uuden käyttäjän (roolina 'admin') luominen
-@app.route("/user/new", methods=["GET", "POST"])
-def user_signup():
+@app.route("/user/new/<team_id>", methods=["GET", "POST"])
+def user_signup(team_id):
     error = None
-    form = UserForm()
+    form = UserForm(team_id=team_id)
     if form.validate_on_submit():
         try:
-            u = User(teamname=form.teamname.data, username=form.username.data, password=form.password.data, role="ADMIN")            
+            u = User(username=form.username.data, password=form.password.data, role="ADMIN", team_id=team_id)       
             db.session.add(u)
             db.session.commit()
             flash("User created")            
@@ -28,14 +29,14 @@ def user_signup():
 def regular_user_signup():
     error = None
     form = RegularUserForm()
-    team = current_user.teamname
+    team = current_user.team_id
     if form.validate_on_submit():
         try:
-            u = User(teamname=team, username=form.username.data, password=form.password.data, role="REGULAR")            
+            u = User(username=form.username.data, password=form.password.data, role="REGULAR", team_id = team)            
             db.session.add(u)
             db.session.commit()
             flash("User created")            
         except Exception as e:
             error = e            
         return redirect(url_for("index"))    
-    return render_template("/user/new_regular.html", form = form, error = error) 
+    return render_template("/user/new_regular.html", form = form, error = error)

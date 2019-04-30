@@ -6,6 +6,7 @@ from application import app, db, login_required
 from application.games.models import Game
 from application.games.forms import GameForm, queryGameForm
 from application.stats.models import Stat
+from application.teams.models import Team
 
 # Uuden pelin luominen, vaatii adminin
 @app.route("/games/new/", methods=["GET", "POST"])
@@ -16,7 +17,7 @@ def games_create():
     if form.validate_on_submit():
         try:
             g = Game(date=form.date.data, opponent=form.opponent.data, our_goals=form.our_goals.data, opponent_goals=form.opponent_goals.data)
-            g.teamname = current_user.teamname
+            g.team_id = current_user.team_id
             db.session.add(g)            
             db.session.commit()
             flash("game added")
@@ -30,7 +31,7 @@ def games_create():
 @app.route("/games/", methods=["GET"])
 @login_required()
 def games_index():
-    g = Game.query.filter(Game.teamname == current_user.teamname).all()
+    g = Game.query.filter(Game.team_id == current_user.team_id).all()
     return render_template("/games/list.html", games=g)
 
 # pelien hakutoiminto, atm vain vastustajan nimellä
@@ -41,7 +42,7 @@ def games_query():
     form = queryGameForm()
     if form.validate_on_submit():
         n = form.opponent.data + "%" 
-        g = Game.query.filter(Game.teamname == current_user.teamname, Game.opponent.like(n)).all()
+        g = Game.query.filter(Game.team_id == current_user.team_id, Game.opponent.like(n)).all()
         if g:
             return render_template("/games/query.html", form=form, games=g)
         else:

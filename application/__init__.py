@@ -72,6 +72,8 @@ from application.auth import models
 from application.auth import views
 from application.stats import models
 from application.stats import views
+from application.teams import models
+from application.teams import views
 
 
 # kirjautumistoiminnallisuudet - osa 2

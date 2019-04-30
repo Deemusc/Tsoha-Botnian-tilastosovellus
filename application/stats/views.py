@@ -15,7 +15,7 @@ def stats_add(game_id):
     error = None
     form = StatForm(game_id = game_id)
     game = Game.query.filter_by(id=game_id).first_or_404()
-    players = Player.list_all(current_user.teamname)
+    players = Player.list_all(current_user.team_id)
 
     players_list = [(p['id'], p['name']) for p in players]
     
@@ -35,6 +35,6 @@ def stats_add(game_id):
 @app.route("/stats/", methods=["GET"])
 @login_required()
 def stats_index():
-    p = Stat.list_points(current_user.teamname)
+    p = Stat.list_points(current_user.team_id)
     
     return render_template("/stats/list.html", points=p)

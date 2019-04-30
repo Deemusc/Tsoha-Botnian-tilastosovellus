@@ -1,26 +1,23 @@
 # tuodaan tarvittavat osat
 from application import db
-from application.models import Base
 from sqlalchemy.sql import text
 
 # käyttäjää kuvaava luokka
-class User(Base):
+class User(db.Model):
 
     __tablename__ = "account"
 
-    teamname = db.Column(db.String(32), nullable=False)
+    id = db.Column(db.Integer, primary_key=True)
     username = db.Column(db.String(32), nullable=False)
     password = db.Column(db.String(32), nullable=False)
     role = db.Column(db.String(10), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
 
-    #games = db.relationship("Game", backref='account', lazy=True)
-    #players = db.relationship("Player", backref='account', lazy=True)
-
-    def __init__(self, teamname, username, password, role):
-        self.teamname = teamname
+    def __init__(self, username, password, role, team_id):
         self.username = username
         self.password = password
         self.role = role
+        self.team_id = team_id
 
     def get_id(self):
         return self.id

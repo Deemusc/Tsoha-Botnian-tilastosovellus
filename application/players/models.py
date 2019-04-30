@@ -8,7 +8,7 @@ class Player(db.Model):
     number = db.Column(db.Integer, nullable=False)
     name = db.Column(db.String(48), nullable=False)
 
-    teamname = db.Column(db.String(32), nullable=False)
+    team_id = db.Column(db.Integer, db.ForeignKey('team.id'), nullable=False)
     
     def __init__(self, name, number):
         self.name = name
@@ -31,10 +31,10 @@ class Player(db.Model):
 
 # metodi, joka antaa kaikki pelaajat
     @staticmethod
-    def list_all(teamname):
+    def list_all(team_id):
         stmt = text("SELECT Player.id, Player.number, Player.name"
                     " FROM PLAYER" 
-                    " WHERE Player.teamname = :teamname;").params(teamname=teamname)
+                    " WHERE Player.team_id = :team_id;").params(team_id=team_id)
         res = db.engine.execute(stmt)
 
         response = []
