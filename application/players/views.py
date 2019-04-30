@@ -1,5 +1,5 @@
 # tuodaan tarvittavat osat
-from flask import redirect, render_template, request, url_for
+from flask import redirect, render_template, request, url_for, flash
 from flask_login import login_required, current_user
 
 from application import app, db, login_required
@@ -52,6 +52,9 @@ def players_query():
 def players_edit(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()
+    if p.team_id != current_user.team_id:
+        flash("You can only edit your own team data.")
+        return redirect(url_for("players_index"))
     form = PlayerForm(obj=p)
     if form.validate_on_submit():
         try:
@@ -70,6 +73,9 @@ def players_edit(id):
 def players_delete(id):
     error = None
     p = Player.query.filter_by(id=id).first_or_404()
+    if p.team_id != current_user.team_id:
+        flash("You can only edit your own team data.")
+        return redirect(url_for("players_index"))
     if p:
         try:
             db.session.delete(p)
