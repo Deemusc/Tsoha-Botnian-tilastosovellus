@@ -67,7 +67,7 @@ Samalla tulee luonnollisesti poistaa tilastomerkinnät ottelusta.
 
 Otteluiden listauksen tai haun yhteydessä ottelun vieressä on nappi *Details*, josta päästään tarkastelemaan kyseisen ottelun tilastomerkintöjä.
 
-**SQL-kysely**: ```SELECT number, name, goals, assists, penalties FROM Player JOIN Stat ON Stat.player_id=Player.id WHERE Stat.game_id=? ```
+**SQL-kysely**: ```SELECT number, name, goals, assists, penalties FROM Player JOIN Stat ON Stat.player_id=Player.id WHERE Stat.game_id=?;```
 
 ## Pistepörssin tarkastelu
 
