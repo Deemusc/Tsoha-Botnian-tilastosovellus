@@ -1,5 +1,4 @@
 {% extends "layout.html" %}
-
 {% block body %}
 <form method="POST" action="{{ url_for('games_edit', id=form.id.data) }}">
     {{ form.hidden_tag() }}
@@ -16,6 +15,7 @@
                     <td>
                         {{ form.date }}
                     </td>  
+                <tr>
                     <td>                
                         <ul>
                             {% for error in form.date.errors %}
@@ -23,12 +23,14 @@
                             {% endfor %}
                         </ul>
                     </td>
+                </tr>    
                     <td>
                         {{ form.opponent.label }}
                     </td>
                     <td>
                         {{ form.opponent }}
                     </td>
+                <tr>    
                     <td>                                                                                       
                         <ul>
                             {% for error in form.opponent.errors %}
@@ -36,12 +38,14 @@
                             {% endfor %}
                         </ul>
                     </td>    
+                </tr>    
                     <td>
                         {{ form.our_goals.label }}
                     </td>
                     <td>
                         {{ form.our_goals }}
                     </td>
+                <tr>    
                     <td>                                                                                                         
                         <ul>
                             {% for error in form.our_goals.errors %}
@@ -49,19 +53,22 @@
                             {% endfor %}
                         </ul>
                     </td>                                                                                                
+                </tr>    
                     <td>
                         {{ form.opponent_goals.label }}
                     </td>
                     <td>
                         {{ form.opponent_goals }}
                     </td>
+                <tr>    
                     <td>                                                                                                         
                         <ul>
                             {% for error in form.opponent_goals.errors %}
                             <li>{{ error }}</li>
                             {% endfor %}
                         </ul>
-                    </td>                                                                                                                                          
+                    </td>
+                </tr>                                                                                                                                              
             </tr>
             <tr>
                 <td colspan="3">
