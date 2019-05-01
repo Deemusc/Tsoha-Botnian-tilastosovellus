@@ -80,4 +80,5 @@ maalimääriä. Mikäli pelaajien tilastot on syötetty väärin, kannattaa otte
 ### Tilastojen tarkastelu
 
 Painikkeesta *Statistics* päästään tarkastelemaan tilastoja. Sivu listaa käytännössä joukkueen pistepörssin, eli pelaajien pelaamat ottelut, tehdyt maalit, syötöt, pisteet 
-sekä jäähyminuutit.
+sekä jäähyminuutit. Pelaajat on listattu luonnollisesti pisteiden mukaisessa suuruusjärjestyksessä. Tasapisteissä maalit ratkaisevat, mutta jos maalitkin ovat tasan, vähemmän
+jäähyminuutteja kerännyt pelaaja on edellä.
