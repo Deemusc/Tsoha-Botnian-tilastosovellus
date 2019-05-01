@@ -2,7 +2,49 @@
 
 ## Asennusohje
 
-Sovellus toimii Herokun palvelimella Internetissä. Se on käytettävissä selaimella, eikä vaadi erityisiä toimenpiteitä.
+### Asentaminen paikallisesti
+
+Kloonaa repositorio käyttöösi ja siirry juurikansioon.
+
+Luo virtuaaliympäristö ```venv``` komennolla:
+
+```python3 -m venv venv```
+
+Ota virtuaaliympäristö käyttöön komennolla:
+
+```source venv/bin/activate```
+
+Asenna riippuvuudet komennolla:
+
+```pip install -r requirements.txt```
+
+Aja sovellus komennolla:
+
+```python run.py```
+
+### Asentaminen Herokuun
+
+Tarvitset käyttäjätilin Herokuun.
+
+Luo sovellukselle paikka Herokuun komennolla:
+
+```heroku create Sovelluksesi-nimi```
+
+Lisää tieto Herokusta git:iin komennolla:
+
+```git remote add heroku https://git.heroku.com/Sovelluksesi-nimi.git```
+
+Lisää ohjelman koodi Herokuun komennolla: 
+
+```git add . git commit -m "Commit-viestisi" git push heroku master```
+
+Lisää sovelluksen käyttöön tieto Herokusta komennolla:
+
+```heroku config:set HEROKU=1```
+
+Luo tietokanta Herokuun komennolla:
+
+```heroku addons:add heroku-postgresql:hobby-dev```
 
 ## Käyttöohje
 
