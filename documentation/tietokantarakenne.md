@@ -47,7 +47,7 @@ jäähyminuuttien määrä. Käyttäjälle annetaan attribuuteiksi joukkueen nim
 
 **Käyttäjä-taulun luonti**
 
-CREATE TABLE account (
+```CREATE TABLE account (
 
 	id INTEGER NOT NULL, 
 
@@ -63,11 +63,11 @@ CREATE TABLE account (
 
 	FOREIGN KEY(team_id) REFERENCES team (id)
 
-);
+);```
 
 **Joukkue-taulun luonti**
 
-CREATE TABLE team (
+```CREATE TABLE team (
 
 	id INTEGER NOT NULL, 
 
@@ -77,11 +77,11 @@ CREATE TABLE team (
 
 	UNIQUE (name)
 
-);
+);```
 
 **Pelaaja-taulun luonti**
 
-CREATE TABLE player (
+```CREATE TABLE player (
 
 	id INTEGER NOT NULL, 
 
@@ -95,11 +95,11 @@ CREATE TABLE player (
 
 	FOREIGN KEY(team_id) REFERENCES team (id)
 
-);
+);```
 
 **Ottelu-taulun luonti**
 
-CREATE TABLE game (
+```CREATE TABLE game (
 
 	id INTEGER NOT NULL, 
 
@@ -117,11 +117,11 @@ CREATE TABLE game (
 
 	FOREIGN KEY(team_id) REFERENCES team (id)
 
-);
+);```
 
 **Tilasto-taulun luonti**
 
-CREATE TABLE stat (
+```CREATE TABLE stat (
 
 	id INTEGER NOT NULL, 
 
@@ -143,4 +143,4 @@ CREATE TABLE stat (
 
 	FOREIGN KEY(player_id) REFERENCES player (id)
 
-);
+);```
