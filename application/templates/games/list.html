@@ -1,25 +1,28 @@
 {% extends "layout.html" %}
-
 {% block body %}
-<table>
-    <tr>
-        <th>Date</th>
-        <th>Opponent</th>
-        <th>Our goals</th>
-        <th>Opponent's goals</th>
-    </tr>
-    {% for game in games %}
-    <tr>
-        <td>{{ game.date }}</td>
-        <td>{{ game.opponent }}</td>
-        <td>{{ game.our_goals }}</td>
-        <td>{{ game.opponent_goals }}</td>        
-        <td>
-            <a class="btn btn-info" href="{{ url_for('games_details', id=game.id) }}">Game Details</a>
-            <a class="btn btn-primary" href="{{ url_for('games_edit', id=game.id) }}">Edit game</a>
-            <a class="btn btn-danger" href="{{ url_for('games_delete', id=game.id) }}">Delete game</a>
-        </td>
-    </tr>
-    {% endfor %}
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Opponent</th>
+            <th scope="col">Our goals</th>
+            <th scope="col">Opponent's goals</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for game in games %}
+        <tr>
+            <td>{{ game.date }}</td>
+            <td>{{ game.opponent }}</td>
+            <td>{{ game.our_goals }}</td>
+            <td>{{ game.opponent_goals }}</td>        
+            <td>
+                <a class="btn btn-info" href="{{ url_for('games_details', id=game.id) }}">Game Details</a>
+                <a class="btn btn-primary" href="{{ url_for('games_edit', id=game.id) }}">Edit game</a>
+                <a class="btn btn-danger" href="{{ url_for('games_delete', id=game.id) }}">Delete game</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

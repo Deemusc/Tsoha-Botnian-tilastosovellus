@@ -1,26 +1,30 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<table>
-    <tr>
-        <th># </th>
-        <th>Player's name</th>
-        <th>Games played</th>
-        <th>Goals</th>
-        <th>Assists</th>
-        <th>Points</th>
-        <th>Penalty minutes</th>
-    </tr>
-    {% for p in points %}
-    <tr>
-        <td>{{ p.number }}</td>
-        <td>{{ p.name }}</td>
-        <td>{{ p.games }}</td>
-        <td>{{ p.goals }}</td>
-        <td>{{ p.assists }}</td>
-        <td>{{ p.points }}</td>
-        <td>{{ p.penalties }}</td>
-    </tr>
-    {% endfor %}
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Player's name</th>
+            <th scope="col">Games played</th>
+            <th scope="col">Goals</th>
+            <th scope="col">Assists</th>
+            <th scope="col">Points</th>
+            <th scope="col">Penalty minutes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in points %}
+        <tr>            
+            <td>{{ p.number }}</td>
+            <td>{{ p.name }}</td>
+            <td>{{ p.games }}</td>
+            <td>{{ p.goals }}</td>
+            <td>{{ p.assists }}</td>
+            <td>{{ p.points }}</td>
+            <td>{{ p.penalties }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
 </table>
 {% endblock %}

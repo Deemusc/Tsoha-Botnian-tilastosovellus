@@ -1,39 +1,41 @@
 {% extends "layout.html" %}
-
 {% block body %}
-<table>
-    <tr>
-        <th>Date </th>
-        <th>Opponent</th>
-        <th>Our goals</th>
-        <th>Opponent's goals</th>
-    </tr>
-    {% if form %}
-        <form action="{{ url_for('games_query') }}" method="POST">
-            {{ form.hidden_tag() }}
-            {{ form.opponent.label }}<br />
-            {{ form.opponent }}<br /><br />
+<table class="table table-sm">
+    <thead>
+        <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Opponent</th>
+            <th scope="col">Our goals</th>
+            <th scope="col">Opponent's goals</th>
+        </tr>
+    </thead>
+        {% if form %}
+            <form action="{{ url_for('games_query') }}" method="POST">
+                {{ form.hidden_tag() }}
+                {{ form.opponent.label }}<br/>
+                {{ form.opponent }}<br/><br/>
             <input class="btn btn-lg btn-primary" role="button" type="submit" value="Search">
         </form>
-    {% endif %}
-
-    {% if games %}
+        {% endif %}
+    <tbody>
+        {% if games %}
         {% for game in games %}
-        <td>{{ game.date }}</td>
-        <td>{{ game.opponent }}</td>
-        <td>{{ game.our_goals }}</td>
-        <td>{{ game.opponent_goals }}</td>
-        <td>
-            <a class="btn btn-info" href="{{ url_for('games_details', id=game.id) }}">Game Details</a>
-            <a class="btn btn-primary" href="{{ url_for('games_edit', id=game.id) }}">Edit game</a>
-            <a class="btn btn-danger" href="{{ url_for('games_delete', id=game.id) }}">Delete game</a>
-        </td>
-        <tr></tr>
+        <tr>
+            <td>{{ game.date }}</td>
+            <td>{{ game.opponent }}</td>
+            <td>{{ game.our_goals }}</td>
+            <td>{{ game.opponent_goals }}</td>
+            <td>
+                <a class="btn btn-info" href="{{ url_for('games_details', id=game.id) }}">Game Details</a>
+                <a class="btn btn-primary" href="{{ url_for('games_edit', id=game.id) }}">Edit game</a>
+                <a class="btn btn-danger" href="{{ url_for('games_delete', id=game.id) }}">Delete game</a>
+            </td>
+        </tr>
         {% endfor %}
-    {% endif %}
-
-    {% if not games %}
-        <td>No games found.</td>
-    {% endif %}
+        {% endif %}
+    </tbody>
+        {% if not games %}
+            <td>No games found.</td>
+        {% endif %}
 </table>
 {% endblock %}

@@ -1,8 +1,7 @@
 {% extends "layout.html" %}
-
 {% block body %}
 <form method="POST" action="{{ url_for('players_edit', id=form.id.data) }}">
-        {{ form.hidden_tag() }}
+    {{ form.hidden_tag() }}
     <table>
         <tr>
             <tr>
@@ -16,6 +15,7 @@
                 <td>
                     {{ form.number }}
                 </td>  
+            <tr>    
                 <td>                
                     <ul>
                         {% for error in form.number.errors %}
@@ -23,23 +23,22 @@
                         {% endfor %}
                     </ul>
                 </td>
+            </tr>
                 <td>
                     {{ form.name.label }}
                 </td>
                 <td>
                     {{ form.name }}
-                </td>
-                <td>                
-                    <td>                
-                <td>                
+                </td>                                                
+            <tr>
+                <td>               
                     <ul>
                         {% for error in form.name.errors %}
                         <li>{{ error }}</li>
                         {% endfor %}
                     </ul>
-                </td>                                                    
-                </td>        
-                </td>                                                    
+                </td>
+            </tr>                                                                                                                                                    
         </tr>
         <tr>
             <td colspan="3">

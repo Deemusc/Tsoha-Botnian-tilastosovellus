@@ -1,31 +1,44 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<table>
-    <tr>
-        <th>Game</th>
-    </tr>
-    <tr>
-        <td>{{ game.date }}</td>
-        <td>{{ game.opponent }}</td>
-        <td>{{ game.our_goals }}</td>
-        <td>{{ game.opponent_goals }}</td>
-    </tr>
-    <tr>
-        <th># </th>
-        <th>Player's name</th>
-        <th>Goals</th>
-        <th>Assists</th>
-        <th>Penalty minutes</th>
-    </tr>
-    {% for p in stats %}
-    <tr>
-        <td>{{ p.number }}</td>
-        <td>{{ p.name }}</td>    
-        <td>{{ p.goals }}</td>
-        <td>{{ p.assists }}</td>        
-        <td>{{ p.penalties }}</td>
-    </tr>
-    {% endfor %}
+<table class="table table-borderless">
+    <thead>
+        <tr>
+            <th scope="col">Game date</th>
+            <th scope="col">Opponent</th>
+            <th scope="col">Our goals</th>
+            <th scope="col">Opponent's goals</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>{{ game.date }}</td>
+            <td>{{ game.opponent }}</td>
+            <td>{{ game.our_goals }}</td>
+            <td>{{ game.opponent_goals }}</td>
+        </tr>
+    </tbody>
+</table>
+<table class="table table-sm">
+    <thead>    
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Player's name</th>
+            <th scope="col">Goals</th>
+            <th scope="col">Assists</th>
+            <th scope="col">Penalty minutes</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for p in stats %}
+        <tr>
+            <td>{{ p.number }}</td>
+            <td>{{ p.name }}</td>    
+            <td>{{ p.goals }}</td>
+            <td>{{ p.assists }}</td>        
+            <td>{{ p.penalties }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>    
 </table>
 {% endblock %}
