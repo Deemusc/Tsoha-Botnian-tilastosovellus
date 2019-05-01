@@ -9,13 +9,13 @@ käsitteen käyttäjä.
 
 Käsitteiden välisiä yhteyksiä ja osallistumisrajoitteita pohtimalla huomataan, että ottelussa voi esiintyä monta pelaajaa ja pelaaja voi pelata useammassa ottelussa.
 Toisaalta tilastomerkintä pitää sisällään tiedon sekä ottelusta, jossa merkinnät tehtiin, että pelaajasta, joka ne teki. Ei siis yhdistetä suoraan pelaajaa ja ottelua, vaan
-tehdään se tilastomerkinnän kautta. Koska yhdellä pelaajalla voi olla vain kerran yhdessä ottelussa, yhdistelmän ottelusta ja pelaajasta tilastomerkintätaulussa on oltava
-uniikki. Käyttäjän tulee olla yhteydessä pelaajaan ja otteluun, jotta käyttäjälle voidaan näyttää vain hänen joukkueensa tilastoja.
+tehdään se tilastomerkinnän kautta. Koska yksi pelaaja voi olla vain kerran yhdessä ottelussa, yhdistelmän ottelusta ja pelaajasta tilastomerkintätaulussa on oltava
+uniikki. Käyttäjän tulee olla yhteydessä pelaajaan ja otteluun, jotta käyttäjälle voidaan näyttää vain hänen joukkueensa tilastoja. Jotta samalle joukkueelle voidaan
+luoda useampi (eritasoinen) käyttäjä, luodaan tietokantataulu joukkueelle, jota kautta liitetään käyttäjä otteluihin ja pelaajiin.
 
 Pelaajan attribuutteina tulee olla id:n lisäksi pelaajan numero ja nimi. Ottelulle halutaan tallettaa id:n lisäksi päivämäärä, vastustajajoukkueen nimi ja molempien 
 joukkueiden tekemien maalien määrä. Kuvataan tilastomerkintöjä taululla *Stat*, johon yhdistetään pelaajan ja ottelun id, sekä näihin liittyen maalien, syöttöjen ja 
-jäähyminuuttien määrä. Käyttäjälle annetaan attribuuteiksi joukkueen nimi, käyttäjänimi ja salasana. Jotta samalle joukkueelle voidaan luoda useampi (eritasoinen)
-käyttäjä, luodaan myös tietokantataulu joukkue, joka liitetään käyttäjään ja otteluihin ja pelaajiin.
+jäähyminuuttien määrä. Käyttäjälle annetaan attribuuteiksi joukkueen nimi, käyttäjänimi ja salasana.
 
 ## Tietokantakaavio
 
@@ -45,17 +45,25 @@ käyttäjä, luodaan myös tietokantataulu joukkue, joka liitetään käyttäjä
 
 ## Create table -lauseet
 
-**Account-taulun luonti**
+**Käyttäjä-taulun luonti**
 
 CREATE TABLE account (
 	id INTEGER NOT NULL, 
-	date_created DATETIME, 
-	date_modified DATETIME, 
-	teamname VARCHAR(32) NOT NULL, 
 	username VARCHAR(32) NOT NULL, 
 	password VARCHAR(32) NOT NULL, 
 	role VARCHAR(10) NOT NULL, 
-	PRIMARY KEY (id)
+	team_id INTEGER NOT NULL, 
+	PRIMARY KEY (id), 
+	FOREIGN KEY(team_id) REFERENCES team (id)
+);
+
+**Joukkue-taulun luonti**
+
+CREATE TABLE team (
+	id INTEGER NOT NULL, 
+	name VARCHAR(32) NOT NULL, 
+	PRIMARY KEY (id), 
+	UNIQUE (name)
 );
 
 **Pelaaja-taulun luonti**
@@ -64,9 +72,9 @@ CREATE TABLE player (
 	id INTEGER NOT NULL, 
 	number INTEGER NOT NULL, 
 	name VARCHAR(48) NOT NULL, 
-	teamname VARCHAR(32) NOT NULL, 
+	team_id INTEGER NOT NULL, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(teamname) REFERENCES account (teamname)
+	FOREIGN KEY(team_id) REFERENCES team (id)
 );
 
 **Ottelu-taulun luonti**
@@ -77,9 +85,9 @@ CREATE TABLE game (
 	opponent VARCHAR(32) NOT NULL, 
 	our_goals INTEGER NOT NULL, 
 	opponent_goals INTEGER NOT NULL, 
-	teamname VARCHAR(32) NOT NULL, 
+	team_id INTEGER NOT NULL, 
 	PRIMARY KEY (id), 
-	FOREIGN KEY(teamname) REFERENCES account (teamname)
+	FOREIGN KEY(team_id) REFERENCES team (id)
 );
 
 **Tilasto-taulun luonti**
