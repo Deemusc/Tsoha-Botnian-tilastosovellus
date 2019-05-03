@@ -56,7 +56,8 @@ CREATE TABLE account (
 	team_id INTEGER NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(team_id) REFERENCES team (id)
-);```
+);
+```
 
 **Joukkue-taulun luonti**
 
