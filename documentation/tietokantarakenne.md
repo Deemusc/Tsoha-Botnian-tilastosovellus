@@ -47,6 +47,7 @@ jäähyminuuttien määrä. Käyttäjälle annetaan attribuuteiksi joukkueen nim
 
 **Käyttäjä-taulun luonti**
 
+```SQL
 CREATE TABLE account (
 	id INTEGER NOT NULL, 
 	username VARCHAR(32) NOT NULL, 
@@ -55,7 +56,7 @@ CREATE TABLE account (
 	team_id INTEGER NOT NULL, 
 	PRIMARY KEY (id), 
 	FOREIGN KEY(team_id) REFERENCES team (id)
-);
+);```
 
 **Joukkue-taulun luonti**
 
