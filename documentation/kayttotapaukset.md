@@ -4,7 +4,9 @@
 
 Pelaajat listataan lisäämisjärjestyksessään linkin *List players* takaa. Käyttäjälle listataan vain hänen joukkueensa pelaajat.
 
-**SQL-kysely**: ```SQL SELECT * FROM Player WHERE team_id=?;```
+**SQL-kysely**: ```SQL
+SELECT * FROM Player WHERE team_id=?;
+```
 
 ## Pelaajan lisääminen tilastotietokantaan
 
