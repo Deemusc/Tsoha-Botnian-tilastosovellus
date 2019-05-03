@@ -61,15 +61,18 @@ CREATE TABLE account (
 
 **Joukkue-taulun luonti**
 
+```SQL
 CREATE TABLE team (
 	id INTEGER NOT NULL, 
 	name VARCHAR(32) NOT NULL, 
 	PRIMARY KEY (id), 
 	UNIQUE (name)
 );
+```
 
 **Pelaaja-taulun luonti**
 
+```SQL
 CREATE TABLE player (
 	id INTEGER NOT NULL, 
 	number INTEGER NOT NULL, 
@@ -78,9 +81,11 @@ CREATE TABLE player (
 	PRIMARY KEY (id), 
 	FOREIGN KEY(team_id) REFERENCES team (id)
 );
+```
 
 **Ottelu-taulun luonti**
 
+```SQL
 CREATE TABLE game (
 	id INTEGER NOT NULL, 
 	date DATE NOT NULL, 
@@ -91,9 +96,11 @@ CREATE TABLE game (
 	PRIMARY KEY (id), 
 	FOREIGN KEY(team_id) REFERENCES team (id)
 );
+```
 
 **Tilasto-taulun luonti**
 
+```SQL
 CREATE TABLE stat (
 	id INTEGER NOT NULL, 
 	game_id INTEGER NOT NULL, 
@@ -106,3 +113,4 @@ CREATE TABLE stat (
 	FOREIGN KEY(game_id) REFERENCES game (id), 
 	FOREIGN KEY(player_id) REFERENCES player (id)
 );
+```
